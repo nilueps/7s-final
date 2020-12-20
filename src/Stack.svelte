@@ -13,6 +13,8 @@
 	function refImages() {
 		layerRefs.forEach((layer, index) => {
 			layer.style.background = `url(${layers[index]})`;
+			layer.style.backgroundSize = "cover";
+			layer.style.backgroundPosition = "top center";
 		});
 	}
 
@@ -75,9 +77,6 @@
 		left: 0;
 		width: 100%;
 		height: 100vh;
-
-		background-size: cover;
-		background-position: top center;
 	}
 	/* 
 	.full::before {
