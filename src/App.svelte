@@ -12,7 +12,7 @@
 	//
 	// stack vars
 	//
-	const layerGap = 100;
+	const layerGap = 200;
 	const featureHeight = 1.2;
 	setContext("stackVars", { layerGap, featureHeight });
 
