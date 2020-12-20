@@ -134,7 +134,7 @@
 <section class="stack">
 	{#if mask}
 		<!-- <div class="full" style="background: url({full});"><span class="content">full {props.id}</span></div> -->
-		<div class="full" style="background: url({full});" />
+		<div class="full" style="background: url({full}); background-size: cover; background-position: top center;" />
 	{/if}
 	{#each layers as _, index}
 		<div bind:this={layerRefs[index]} class="layer">
