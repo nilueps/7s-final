@@ -1,5 +1,6 @@
 <script>
 	import { onMount, setContext } from "svelte";
+	import About from "./About.svelte";
 	import Landing from "./Landing.svelte";
 	import Page0 from "./Page0.svelte";
 	import Page1 from "./Page1.svelte";
@@ -13,16 +14,75 @@
 	// stack vars
 	//
 	const layerGap = 200;
-	const featureHeight = 1.2;
-	setContext("stackVars", { layerGap, featureHeight });
+	const featureScale = 1.0;
+	setContext("stackVars", { layerGap, featureScale });
 
 	//
 	// component refs
 	//
-	const stacks = [Landing, Page0, Page1, Page2, Page3, Page4, Page5, Page6];
-	const layerCounts = [0, 7, 7, 7, 7, 7, 7, 7];
+	const stacks = [
+		Landing,
+		Page0,
+		Page1,
+		Page2,
+		Page3,
+		Page4,
+		Page5,
+		Page6,
+		About,
+	];
+	const titles = [
+		"berg intro",
+		"nd vibra",
+		"802/Red/B",
+		"fork razor",
+		"4435, 10, upper",
+		"ritter, gabo",
+		"memory",
+		"about",
+	];
+	//
+	// sources
+	//
+	const folders = [
+		"bergintro",
+		"ndvibra",
+		"red",
+		"forkrazor",
+		"covid",
+		"ritter",
+		"memory",
+	];
+	const layerCounts = [0, 7, 7, 7, 7, 7, 7, 7, 0];
+	const featureScales = [1.0, 2, 2, 2, 2, 2, 2, 2, 2];
 	const sections = stacks.length;
 	const thresholds = []; // populated onMount with section 'tops'
+
+	//
+	// asset preload
+	//
+	function preloadImg(src) {
+		return new Promise((resolve) => {
+			const img = new Image();
+			img.onload = resolve;
+			img.src = src;
+		});
+	}
+
+	function preloadAll() {
+		const promises = [];
+		for (let [i, folder] of folders.entries()) {
+			const n = i + 1;
+			const path = `img/${n}_${folder}/`;
+			const full = path + `${n}_full.png`;
+			promises.push(preloadImg(full));
+			for (let j = 1; j < layerCounts[n] + 1; j++) {
+				const layer = path + `${n}_${j}.png`;
+				promises.push(preloadImg(layer));
+			}
+		}
+		return Promise.all(promises);
+	}
 
 	let topStack = stacks[0];
 	let topProps = {
@@ -75,27 +135,24 @@
 	//
 	// Scrollbar dummy
 	//
-	let dummy, dummyH;
-
-	onMount(() => {
-		const featureH = window.innerHeight * featureHeight;
-		// calculate document height needed for dummy
-		dummyH =
-			featureH * (sections + 1) +
-			layerCounts.reduce((s, v) => s + v * layerGap);
-		dummy.style.height = dummyH + "px";
-		// calculate section thresholds
-		for (
-			let i = 0, y = 0;
-			y < dummyH;
-			y += featureH + layerCounts[i] * layerGap, i++
-		) {
-			thresholds.push(y);
-		}
-	});
+	const featureH = (i) => featureScales[i] * window.innerHeight;
+	const layersH = (i) => layerCounts[i] * layerGap;
+	const sectionH = (i) => featureH(i) + layersH(i);
+	// calculate document height needed for dummy
+	const dummyH = stacks.reduce((s, _, i) => s + sectionH(i), 0);
+	console.log(dummyH)
+	// calculate section thresholds
+	for (let i = 0, y = 0; y < dummyH; y += sectionH(i), i++) {
+		thresholds.push(y);
+	}
+	onMount(() => {});
 </script>
 
 <style>
+	.loading {
+
+	}
+
 	.dummy {
 		position: absolute;
 		top: 0;
@@ -154,19 +211,23 @@
 	</style>
 </svelte:head>
 <svelte:window on:scroll={handleScroll} />
-<div bind:this={dummy} class="dummy">
-	<div class="top">
-		<svelte:component
-			this={topStack}
-			offset={topOffset}
-			props={topProps}
-			mask={false} />
+{#await preloadAll()}
+	<Landing text="loading"/>
+{:then _}
+	<div class="dummy" style="height: {dummyH}px">
+		<div class="top">
+			<svelte:component
+				this={topStack}
+				offset={topOffset}
+				props={topProps}
+				mask={false} />
+		</div>
+		<div class="bottom">
+			<svelte:component
+				this={bottomStack}
+				offset={0}
+				props={bottomProps}
+				mask={true} />
+		</div>
 	</div>
-	<div class="bottom">
-		<svelte:component
-			this={bottomStack}
-			offset={0}
-			props={bottomProps}
-			mask={true} />
-	</div>
-</div>
+{/await}
