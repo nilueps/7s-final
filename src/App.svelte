@@ -101,14 +101,15 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-		background: repeating-linear-gradient(
+		background: transparent;
+		/* background: repeating-linear-gradient(
 			45deg,
 			white,
 			white 1rem,
 			aliceblue 1rem,
 			aliceblue 2rem
 		);
-		border: 1rem solid aliceblue;
+		border: 1rem solid aliceblue; */
 	}
 
 	.top,
@@ -148,6 +149,7 @@
 		html,
 		body {
 			font-size: 100%;
+			background: var(--mainbgcolor);
 		}
 	</style>
 </svelte:head>
