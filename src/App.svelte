@@ -135,7 +135,7 @@
 		@import url("https://dev-cats.github.io/code-snippets/JetBrainsMono.css");
 
 		:root {
-			--mainbgcolor: #726A6A
+			--mainbgcolor: #726665;
 		}
 
 		* {
