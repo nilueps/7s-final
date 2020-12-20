@@ -55,12 +55,12 @@
       left: 0;
       width: 100%;
       height: 100vh;
-      background: var(--mainbgcolor);
+      background: transparent;
       z-index: 1;
       overflow: hidden;
       color: white;
       user-select: none;
-      font-size: 18px;
+      font-size: 1.25rem;
       font-weight: normal;
       opacity: 0.9;
     }
@@ -74,6 +74,6 @@
   </style>
   
   <div class="landing" bind:this={landing} on:mousemove={animate}>
-    <p class={'title'} bind:this={title}>seven spaces</p>
+    <span class={'title'} bind:this={title}>seven spaces</span>
   </div>
   

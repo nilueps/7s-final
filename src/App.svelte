@@ -1,20 +1,27 @@
 <script>
 	import { onMount, setContext } from "svelte";
+	import Landing from "./Landing.svelte";
 	import Page0 from "./Page0.svelte";
 	import Page1 from "./Page1.svelte";
 	import Page2 from "./Page2.svelte";
 	import Page3 from "./Page3.svelte";
-import Page4 from "./Page4.svelte";
-import Page5 from "./Page5.svelte";
-import Page6 from "./Page6.svelte";
-import Page7 from "./Page7.svelte";
+	import Page4 from "./Page4.svelte";
+	import Page5 from "./Page5.svelte";
+	import Page6 from "./Page6.svelte";
+
+	//
+	// stack vars
+	//
 	const layerGap = 100;
 	const featureHeight = 1.2;
 	setContext("stackVars", { layerGap, featureHeight });
-	const stacks = [Page0, Page1, Page2, Page3, Page4, Page5, Page6];
-	const layerCounts = [7, 7, 7, 7, 7, 7, 7, 7];
+
+	//
+	// component refs
+	//
+	const stacks = [Landing, Page0, Page1, Page2, Page3, Page4, Page5, Page6];
+	const layerCounts = [1, 7, 7, 7, 7, 7, 7, 7];
 	const sections = stacks.length;
-	const layerDummy = new Array(sections).fill();
 	const thresholds = []; // populated onMount with section 'tops'
 
 	let topStack = stacks[0];
@@ -73,13 +80,18 @@ import Page7 from "./Page7.svelte";
 	onMount(() => {
 		const featureH = window.innerHeight * featureHeight;
 		// calculate document height needed for dummy
-		dummyH = featureH * sections + layerCounts.reduce((s, v) => s + v * layerGap);
+		dummyH =
+			featureH * sections +
+			layerCounts.reduce((s, v) => s + v * layerGap);
 		dummy.style.height = dummyH + "px";
 		// calculate section thresholds
-		for (let i = 0, y = 0; y < dummyH; y += featureH + layerCounts[i] * layerGap, i++) {
+		for (
+			let i = 0, y = 0;
+			y < dummyH;
+			y += featureH + layerCounts[i] * layerGap, i++
+		) {
 			thresholds.push(y);
 		}
-		// set context
 	});
 </script>
 
@@ -120,6 +132,11 @@ import Page7 from "./Page7.svelte";
 <svelte:head>
 	<style>
 		@import url("https://dev-cats.github.io/code-snippets/JetBrainsMono.css");
+
+		:root {
+			--mainbgcolor: #726A6A
+		}
+
 		* {
 			box-sizing: border-box;
 			font-family: "JetBrains Mono";
@@ -127,6 +144,7 @@ import Page7 from "./Page7.svelte";
 			margin: 0;
 			padding: 0;
 		}
+
 		html,
 		body {
 			font-size: 100%;

@@ -116,7 +116,7 @@
 		border: 1rem solid lavenderblush;
 		opacity: 0.7;
 	} */
-	.content {
+	/* .content {
 		position: absolute;
 		bottom: 1rem;
 		left: 50%;
@@ -131,7 +131,7 @@
 		transform: translate(-50%, -50%);
 		font-size: 9rem;
 		border: 1.2rem solid;
-	}
+	} */
 </style>
 
 <section class="stack">
