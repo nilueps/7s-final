@@ -1,6 +1,8 @@
 <script>
     import { onMount } from "svelte"
-  
+
+    export let text = "seven spaces";
+
     let landing, title
 
     function initAnimate() {
@@ -74,6 +76,6 @@
   </style>
   
   <div class="landing" bind:this={landing} on:mousemove={animate}>
-    <span class={'title'} bind:this={title}>seven spaces</span>
+    <span class={'title'} bind:this={title}>{text}</span>
   </div>
   
