@@ -20,7 +20,7 @@
 	// component refs
 	//
 	const stacks = [Landing, Page0, Page1, Page2, Page3, Page4, Page5, Page6];
-	const layerCounts = [1, 7, 7, 7, 7, 7, 7, 7];
+	const layerCounts = [0, 7, 7, 7, 7, 7, 7, 7];
 	const sections = stacks.length;
 	const thresholds = []; // populated onMount with section 'tops'
 
@@ -59,7 +59,7 @@
 		const isPastThreshold = (threshold) => scrollY <= threshold;
 		let idx = thresholds.findIndex(isPastThreshold);
 		if (idx < 1) idx = 1;
-		if (idx < 0) idx = thresholds.length - 1;
+		if (idx < 0) idx = stacks.length - 1;
 		const visibleIndices = [idx - 1, idx];
 
 		updateVisibleStacks(visibleIndices);
@@ -81,7 +81,7 @@
 		const featureH = window.innerHeight * featureHeight;
 		// calculate document height needed for dummy
 		dummyH =
-			featureH * sections +
+			featureH * (sections + 1) +
 			layerCounts.reduce((s, v) => s + v * layerGap);
 		dummy.style.height = dummyH + "px";
 		// calculate section thresholds

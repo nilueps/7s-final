@@ -17,7 +17,9 @@
 	}
 
 	function isBigJump(a, b) {
-		return Math.max(a) - Math.min(b) >= window.innerHeight;
+		const A = Math.abs(Math.max(a, b));
+		const B = Math.abs(Math.min(a, b));
+		return A - B >= 0.8 * window.innerHeight;
 	}
 
 	function layerTop(index) {
@@ -33,13 +35,9 @@
 		return () => {
 			layerRefs.forEach((layer, index) => {
 				const top = layerTop(index);
-				if (tops.length === 0) {
-					tops[index] = top;
-					return;
-				}
 				layer.style.zIndex = -index;
 				layer.style.top = -top + "px";
-				layer.style.transition = isBigJump(tops[index], top)
+				layer.style.transition = tops.length === 0 || isBigJump(tops[index], top)
 					? "initial"
 					: `top ease ${props.easing}`;
 				tops[index] = top;
