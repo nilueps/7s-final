@@ -6,8 +6,9 @@
 	export let full;
 	export let props;
 	export let offset;
-	const { layerGap, featureHeight } = getContext("stackVars");
+	const { layerGap, featureScales } = getContext("stackVars");
 
+	let fullRef;
 	let layerRefs = [];
 
 	function refImages() {
@@ -32,19 +33,29 @@
 		}
 	}
 
+
 	function layerStyleUpdater() {
 		const tops = [];
-		return () => {
-			layerRefs.forEach((layer, index) => {
-				const top = layerTop(index);
-				layer.style.zIndex = -index;
-				layer.style.top = -top + "px";
-				layer.style.transition = tops.length === 0 || isBigJump(tops[index], top)
-					? "initial"
-					: `top ease ${props.easing}`;
-				tops[index] = top;
-			});
-		};
+		if (mask) {
+			return () => {
+				const top = offset;
+				fullRef.style.top = -top + "px";
+				fullRef.style.transition = `top ease ${props.easing}`;
+			}
+		} else {
+			return () => {
+				layerRefs.forEach((layer, index) => {
+					const top = layerTop(index);
+					layer.style.zIndex = -index;
+					layer.style.top = -top + "px";
+					layer.style.transition =
+						tops.length === 0 || isBigJump(tops[index], top)
+							? "initial"
+							: `top ease ${props.easing}`;
+					tops[index] = top;
+				});
+			};
+		}
 	}
 
 	let updateLayerStyles;
@@ -134,7 +145,10 @@
 <section class="stack">
 	{#if mask}
 		<!-- <div class="full" style="background: url({full});"><span class="content">full {props.id}</span></div> -->
-		<div class="full" style="background: url({full}); background-size: cover; background-position: top center;" />
+		<div
+			bind:this={fullRef}
+			class="full"
+			style="height: calc(100vh * {featureScales[props.id]}); background: url({full}); background-size: cover; background-position: top center;" />
 	{/if}
 	{#each layers as _, index}
 		<div bind:this={layerRefs[index]} class="layer">

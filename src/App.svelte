@@ -11,25 +11,18 @@
 	import Page6 from "./Page6.svelte";
 
 	//
-	// stack vars
-	//
-	const layerGap = 200;
-	const featureScale = 1.0;
-	setContext("stackVars", { layerGap, featureScale });
-
-	//
 	// component refs
 	//
 	const stacks = [
 		Landing,
 		Page0,
-		Page1,
+		Page1,/* 
 		Page2,
 		Page3,
 		Page4,
 		Page5,
 		Page6,
-		About,
+		About, */
 	];
 	const titles = [
 		"berg intro",
@@ -55,6 +48,12 @@
 	];
 	const layerCounts = [0, 7, 7, 7, 7, 7, 7, 7, 0];
 	const featureScales = [1.0, 2, 2, 2, 2, 2, 2, 2, 2];
+
+	//
+	// stack vars
+	//
+	const layerGap = 200;
+	setContext("stackVars", { layerGap, featureScales });
 
 	function preloadImg(src) {
 		return new Promise((resolve) => {
@@ -118,6 +117,8 @@
 		bottomStack = stacks[indices[1]];
 		topProps.id = indices[0];
 		bottomProps.id = indices[1];
+		topProps.offset = topOffset;
+		bottomProps.offset = topOffset + sectionH(topProps.id)
 	}
 
 	function calcSectionOffset(currentOffset) {
@@ -225,7 +226,7 @@
 		<div class="bottom">
 			<svelte:component
 				this={bottomStack}
-				offset={0}
+				offset={topOffset}
 				props={bottomProps}
 				mask={true} />
 		</div>
