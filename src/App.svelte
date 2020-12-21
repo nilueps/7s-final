@@ -189,6 +189,7 @@
 
 <svelte:head>
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 		@import url("https://dev-cats.github.io/code-snippets/JetBrainsMono.css");
 
 		:root {
@@ -197,7 +198,7 @@
 
 		* {
 			box-sizing: border-box;
-			font-family: "JetBrains Mono";
+			font-family: "Rubik", "JetBrains Mono", monospace;
 			line-height: 1.2;
 			margin: 0;
 			padding: 0;
