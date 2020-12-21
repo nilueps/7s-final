@@ -42,7 +42,7 @@
 		"about",
 	];
 	//
-	// sources
+	// asset preload
 	//
 	const folders = [
 		"bergintro",
@@ -55,12 +55,7 @@
 	];
 	const layerCounts = [0, 7, 7, 7, 7, 7, 7, 7, 0];
 	const featureScales = [1.0, 2, 2, 2, 2, 2, 2, 2, 2];
-	const sections = stacks.length;
-	const thresholds = []; // populated onMount with section 'tops'
 
-	//
-	// asset preload
-	//
 	function preloadImg(src) {
 		return new Promise((resolve) => {
 			const img = new Image();
@@ -95,6 +90,23 @@
 		easing: "",
 	};
 	//
+	// Scrollbar dummy
+	//
+	const featureH = (i) => featureScales[i] * window.innerHeight;
+	const layersH = (i) => layerCounts[i] * layerGap;
+	const sectionH = (i) => featureH(i) + layersH(i);
+
+	// calculate document height needed for dummy
+	const dummyH = stacks.reduce((s, _, i) => s + sectionH(i), 0);
+	console.log(dummyH)
+
+	// calculate section thresholds
+	const thresholds = []; // populated onMount with section 'tops'
+	for (let i = 0, y = 0; y < dummyH; y += sectionH(i), i++) {
+		thresholds.push(y);
+	}
+
+	//
 	// Scroll logic
 	//
 	let ticking = false,
@@ -116,7 +128,8 @@
 		ticking = false;
 		if (!dummyH) return;
 		// update visible components
-		const isPastThreshold = (threshold) => scrollY <= threshold;
+		const tOffset = layerGap;
+		const isPastThreshold = (threshold) => scrollY <= threshold - tOffset;
 		let idx = thresholds.findIndex(isPastThreshold);
 		if (idx < 1) idx = 1;
 		if (idx < 0) idx = stacks.length - 1;
@@ -132,20 +145,6 @@
 		ticking = true;
 	};
 
-	//
-	// Scrollbar dummy
-	//
-	const featureH = (i) => featureScales[i] * window.innerHeight;
-	const layersH = (i) => layerCounts[i] * layerGap;
-	const sectionH = (i) => featureH(i) + layersH(i);
-	// calculate document height needed for dummy
-	const dummyH = stacks.reduce((s, _, i) => s + sectionH(i), 0);
-	console.log(dummyH)
-	// calculate section thresholds
-	for (let i = 0, y = 0; y < dummyH; y += sectionH(i), i++) {
-		thresholds.push(y);
-	}
-	onMount(() => {});
 </script>
 
 <style>
