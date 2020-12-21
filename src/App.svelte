@@ -1,6 +1,7 @@
 <script>
 	import { onMount, setContext } from "svelte";
 	import About from "./About.svelte";
+import Full from "./Full.svelte";
 	import Landing from "./Landing.svelte";
 	import Page0 from "./Page0.svelte";
 	import Page1 from "./Page1.svelte";
@@ -9,164 +10,208 @@
 	import Page4 from "./Page4.svelte";
 	import Page5 from "./Page5.svelte";
 	import Page6 from "./Page6.svelte";
+	import Section from "./Section.svelte";
+import Stack from "./Stack.svelte";
 
 	//
 	// component refs
 	//
-	const stacks = [
-		Landing,
-		Page0,
-		Page1,/* 
-		Page2,
-		Page3,
-		Page4,
-		Page5,
-		Page6,
-		About, */
-	];
-	const titles = [
-		"berg intro",
-		"nd vibra",
-		"802/Red/B",
-		"fork razor",
-		"4435, 10, upper",
-		"ritter, gabo",
-		"memory",
-		"about",
-	];
 	//
 	// asset preload
 	//
-	const folders = [
-		"bergintro",
-		"ndvibra",
-		"red",
-		"forkrazor",
-		"covid",
-		"ritter",
-		"memory",
+	const sections = [
+		{
+			id: 0,
+			title: "landing",
+			folder: "",
+			variation: "full",
+			layerCount: 0,
+			yScale: 1.0,
+			component: Landing
+		},
+		{
+			id: 1,
+			title: "berg intro",
+			folder: "bergintro",
+			isSpecial: false,
+			variation: "double",
+			layerCount: 7,
+			yScale: 2.0,
+		},
+		{
+			id: 2,
+			title: "nd vibra",
+			folder: "ndvibra",
+			isSpecial: false,
+			variation: "full",
+			layerCount: 7,
+			yScale: 2.0,
+		},
+		{
+			id: 3,
+			title: "802/Red/B",
+			folder: "red",
+			isSpecial: false,
+			variation: "full",
+			layerCount: 7,
+			yScale: 2.0,
+		},
+		{
+			id: 4,
+			title: "fork razor",
+			folder: "forkrazor",
+			isSpecial: false,
+			variation: "full",
+			layerCount: 7,
+			yScale: 2.0,
+		},
+		{
+			id: 5,
+			title: "4435, 10, upper",
+			folder: "covid",
+			isSpecial: false,
+			variation: "full",
+			layerCount: 7,
+			yScale: 2.0,
+		},
+		{
+			id: 6,
+			title: "ritter, gabo",
+			folder: "ritter",
+			isSpecial: false,
+			variation: "full",
+			layerCount: 7,
+			yScale: 2.0,
+		},
+		{
+			id: 7,
+			title: "memory",
+			folder: "memory",
+			isSpecial: false,
+			variation: "full",
+			layerCount: 7,
+			yScale: 2.0,
+		},
+		{
+			id: 8,
+			title: "about",
+			folder: "",
+			isSpecial: true,
+			variation: "full",
+			layerCount: 0,
+			yScale: 2.0,
+			component: About
+		},
 	];
-	const layerCounts = [0, 7, 7, 7, 7, 7, 7, 7, 0];
-	const featureScales = [1.0, 2, 2, 2, 2, 2, 2, 2, 2];
-
 	//
 	// stack vars
 	//
 	const layerGap = 200;
-	setContext("stackVars", { layerGap, featureScales });
 
-	function preloadImg(src) {
+	function preloadImg(src, cb) {
 		return new Promise((resolve) => {
 			const img = new Image();
 			img.onload = resolve;
 			img.src = src;
+			cb(img);
 		});
 	}
 
 	function preloadAll() {
 		const promises = [];
-		for (let [i, folder] of folders.entries()) {
-			const n = i + 1;
-			const path = `img/${n}_${folder}/`;
-			const full = path + `${n}_full.png`;
-			promises.push(preloadImg(full));
-			for (let j = 1; j < layerCounts[n] + 1; j++) {
-				const layer = path + `${n}_${j}.png`;
-				promises.push(preloadImg(layer));
+		for (let section of sections) {
+			// skip first (landing) and last (about)
+			if (section.id === 0 || section.id === sections.length - 1)
+				continue;
+
+			const path = `img/${section.id}_${section.folder}/`;
+			const fullPath = path + `${section.id}_${section.variation}.png`;
+			const setFullProp = (img) => (section.full = img);
+			promises.push(preloadImg(fullPath, setFullProp));
+
+			for (let j = 1; j < section.layerCount + 1; j++) {
+				const layerPath = path + `${section.id}_${j}.png`;
+				if (!section.layers) section.layers = [];
+				const setLayerProp = (img) =>
+					(section.layers = [...section.layers, img]);
+				promises.push(preloadImg(layerPath, setLayerProp));
 			}
 		}
 		return Promise.all(promises);
 	}
 
-	let topStack = stacks[0];
-	let topProps = {
-		id: 0,
-		easing: "200ms",
-	};
-	let bottomStack = stacks[1];
-	let bottomProps = {
-		id: 1,
-		easing: "",
-	};
 	//
 	// Scrollbar dummy
 	//
-	const featureH = (i) => featureScales[i] * window.innerHeight;
-	const layersH = (i) => layerCounts[i] * layerGap;
+	const featureH = (i) => sections[i].yScale * window.innerHeight;
+	const layersH = (i) => sections[i].layerCount * layerGap;
 	const sectionH = (i) => featureH(i) + layersH(i);
 
 	// calculate document height needed for dummy
-	const dummyH = stacks.reduce((s, _, i) => s + sectionH(i), 0);
-	console.log(dummyH)
-
+	const dummyH = sections.reduce((h, _, i) => h + sectionH(i), 0);
 	// calculate section thresholds
 	const thresholds = []; // populated onMount with section 'tops'
 	for (let i = 0, y = 0; y < dummyH; y += sectionH(i), i++) {
 		thresholds.push(y);
 	}
-
+	//
+	// global 	context vars
+	//
+	const easing = "top ease 200ms"
+	setContext("stackVars", { layerGap, thresholds, easing });
 	//
 	// Scroll logic
 	//
+	let topProps = sections[0];
+	let bottomProps = sections[1];
+	
 	let ticking = false,
 		scrollY = 0,
-		topOffset = 0;
+		topOffset = 0,
+		bottomOffset = 0;
+
 
 	function updateVisibleStacks(indices) {
-		topStack = stacks[indices[0]];
-		bottomStack = stacks[indices[1]];
-		topProps.id = indices[0];
-		bottomProps.id = indices[1];
+		topProps = sections[indices[0]];
+		bottomProps = sections[indices[1]];
 		topProps.offset = topOffset;
-		bottomProps.offset = topOffset + sectionH(topProps.id)
+		bottomProps.offset = bottomOffset;
 	}
 
-	function calcSectionOffset(currentOffset) {
-		topOffset = currentOffset;
+	function calcSectionOffsets(indices) {
+		topOffset = scrollY - thresholds[indices[0]];
+		bottomOffset = topOffset - window.innerHeight;
 	}
 
 	function updateStack() {
 		ticking = false;
+		scrollY = window.scrollY;
 		if (!dummyH) return;
 		// update visible components
-		const tOffset = layerGap;
-		const isPastThreshold = (threshold) => scrollY <= threshold - tOffset;
-		let idx = thresholds.findIndex(isPastThreshold);
+		const tOffset = layerGap; // to swap out the placeholder before reaching the layers
+		const isPastThreshold = (threshold) => scrollY <= threshold;
+		let idx = thresholds.findIndex((t) => isPastThreshold(t - tOffset));
 		if (idx < 1) idx = 1;
-		if (idx < 0) idx = stacks.length - 1;
+		if (idx < 0) idx = sections.length - 1;
 		const visibleIndices = [idx - 1, idx];
 
+		calcSectionOffsets(visibleIndices);
 		updateVisibleStacks(visibleIndices);
-		calcSectionOffset(scrollY - thresholds[visibleIndices[0]]);
 	}
 
 	const handleScroll = (evt) => {
-		scrollY = window.scrollY;
 		if (!ticking) requestAnimationFrame(updateStack);
 		ticking = true;
 	};
-
 </script>
 
 <style>
-	.loading {
-
-	}
-
 	.dummy {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		background: transparent;
-		/* background: repeating-linear-gradient(
-			45deg,
-			white,
-			white 1rem,
-			aliceblue 1rem,
-			aliceblue 2rem
-		);
-		border: 1rem solid aliceblue; */
 	}
 
 	.top,
@@ -189,8 +234,7 @@
 
 <svelte:head>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-		@import url("https://dev-cats.github.io/code-snippets/JetBrainsMono.css");
+		@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
 		:root {
 			--mainbgcolor: #726665;
@@ -198,7 +242,7 @@
 
 		* {
 			box-sizing: border-box;
-			font-family: "Rubik", "JetBrains Mono", monospace;
+			font-family: "Rubik", monospace;
 			line-height: 1.2;
 			margin: 0;
 			padding: 0;
@@ -213,22 +257,22 @@
 </svelte:head>
 <svelte:window on:scroll={handleScroll} />
 {#await preloadAll()}
-	<Landing text="loading"/>
+	<Landing text="loading" />
 {:then _}
 	<div class="dummy" style="height: {dummyH}px">
 		<div class="top">
-			<svelte:component
-				this={topStack}
-				offset={topOffset}
-				props={topProps}
-				mask={false} />
+			{#if topProps.component != null}
+				<svelte:component this={topProps.component}/>
+			{:else}
+				<Stack props={topProps}/>
+			{/if}
 		</div>
 		<div class="bottom">
-			<svelte:component
-				this={bottomStack}
-				offset={topOffset}
-				props={bottomProps}
-				mask={true} />
+			{#if bottomProps.component != null}
+				<svelte:component this={bottomProps.component}/>
+			{:else}
+				<Full props={bottomProps}/>
+			{/if}
 		</div>
 	</div>
 {/await}

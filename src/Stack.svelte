@@ -1,21 +1,18 @@
 <script>
 	import { getContext, beforeUpdate, onMount, onDestroy } from "svelte";
 
-	export let layers;
-	export let mask;
-	export let full;
 	export let props;
-	export let offset;
-	const { layerGap, featureScales } = getContext("stackVars");
+	const { easing, layerGap } = getContext("stackVars");
+	$: offset = props.offset;
 
-	let fullRef;
 	let layerRefs = [];
 
 	function refImages() {
 		layerRefs.forEach((layer, index) => {
-			layer.style.background = `url(${layers[index]})`;
-			layer.style.backgroundSize = "cover";
-			layer.style.backgroundPosition = "top center";
+			layer.appendChild(props.layers[index]);
+			// layer.style.background = `url(${layers[index]})`;
+			// layer.style.backgroundSize = "cover";
+			// layer.style.backgroundPosition = "top center";
 		});
 	}
 
@@ -33,44 +30,30 @@
 		}
 	}
 
-
 	function layerStyleUpdater() {
 		const tops = [];
-		if (mask) {
-			return () => {
-				const top = offset;
-				fullRef.style.top = -top + "px";
-				fullRef.style.transition = `top ease ${props.easing}`;
-			}
-		} else {
-			return () => {
-				layerRefs.forEach((layer, index) => {
-					const top = layerTop(index);
-					layer.style.zIndex = -index;
-					layer.style.top = -top + "px";
-					layer.style.transition =
-						tops.length === 0 || isBigJump(tops[index], top)
-							? "initial"
-							: `top ease ${props.easing}`;
-					tops[index] = top;
-				});
-			};
-		}
+		return () => {
+			layerRefs.forEach((layer, index) => {
+				const top = layerTop(index);
+				layer.style.zIndex = -index;
+				layer.style.top = -top + "px";
+				layer.style.transition =
+					tops.length === 0 || isBigJump(tops[index], top)
+						? "initial"
+						: easing;
+				tops[index] = top;
+			});
+		};
 	}
 
 	let updateLayerStyles;
 	beforeUpdate(() => {
-		if (updateLayerStyles != null) updateLayerStyles();
+		if (updateLayerStyles != null && props.layers != null) updateLayerStyles();
 	});
 
 	onMount(() => {
 		updateLayerStyles = layerStyleUpdater();
-		refImages();
-		console.log("the component has been mounted");
-	});
-
-	onDestroy(() => {
-		console.log("the component is being destroyed");
+		//refImages();
 	});
 </script>
 
@@ -81,78 +64,28 @@
 		font-size: 3rem;
 	}
 
-	.layer,
-	.full {
+	.layer {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100vh;
 	}
-	/* 
-	.full::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: calc(100% - 2rem);
-		height: calc(100vh - 2rem);
-		background: repeating-linear-gradient(
-			-45deg,
-			white,
-			white 1rem,
-			lavender 1rem,
-			lavender 2rem
-		);
-		border: 1rem solid lavender;
-		opacity: 1;
-	}
-	.layer::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: calc(100% - 2rem);
-		height: calc(100vh - 2rem);
-		background: repeating-linear-gradient(
-			45deg,
-			white,
-			white 1rem,
-			lavenderblush 1rem,
-			lavenderblush 2rem
-		);
-		border: 1rem solid lavenderblush;
-		opacity: 0.7;
-	} */
-	/* .content {
-		position: absolute;
-		bottom: 1rem;
-		left: 50%;
-		transform: translate(-50%, 0);
-		background: white;
-		border: 0.25rem solid;
-	}
 
-	.full .content {
-		bottom: unset;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		font-size: 9rem;
-		border: 1.2rem solid;
-	} */
+	.layer img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: auto;
+		}
 </style>
 
-<section class="stack">
-	{#if mask}
-		<!-- <div class="full" style="background: url({full});"><span class="content">full {props.id}</span></div> -->
-		<div
-			bind:this={fullRef}
-			class="full"
-			style="height: calc(100vh * {featureScales[props.id]}); background: url({full}); background-size: cover; background-position: top center;" />
+<div class="stack">
+	{#if props.layers != null}
+		{#each props.layers as img, index}
+			<div bind:this={layerRefs[index]} class="layer"><img src={img.src} alt="fragment"/>
+			</div>
+		{/each}
 	{/if}
-	{#each layers as _, index}
-		<div bind:this={layerRefs[index]} class="layer">
-			<!-- <span class="content">layer {index}-{props.id}</span> -->
-		</div>
-	{/each}
-</section>
+</div>
