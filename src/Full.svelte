@@ -10,7 +10,6 @@
 
     function styleUpdater() {
         return () => {
-            console.log(section.fullTop)
             let top = (scrollY < section.fullTop) ? 0 : scrollY - section.fullTop;
             fullRef.style.top = -top + "px";
             // fullRef.style.transition = easing;
