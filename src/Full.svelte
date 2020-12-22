@@ -4,7 +4,7 @@
     export let section;
     export let scrollY;
     // const { easing } = getContext("stackVars");
-
+    $:src = section.full;
     let fullRef;
     let fullH;
 
@@ -18,11 +18,16 @@
 
     let updateLayerStyles;
     beforeUpdate(() => {
+        if (fullRef != null && fullRef.firstChild != src) {
+            console.log("replacing", fullRef.firstChild, src)
+            fullRef.replaceChild(src, fullRef.firstChild)
+        }
         fullH = window.innerHeight * section.fullScale;
         if (updateLayerStyles != null) updateLayerStyles();
     });
 
     onMount(() => {
+        fullRef.appendChild(src)
         updateLayerStyles = styleUpdater();
     });
 </script>
@@ -35,13 +40,9 @@
         width: 100%;
         font-size: 3rem;
     }
-	.full > img {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
 </style>
 
 <div bind:this={fullRef} class="full" style="height: {fullH}px;">
-    <img width="100%" height="100%" src={section.full.src} alt="placeholder" />
+    <!-- <img {src} alt="bg"/> -->
+    <!-- <img width="100%" height="100%" src={section.full.src} alt="placeholder" /> -->
 </div>

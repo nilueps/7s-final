@@ -101,6 +101,11 @@
 			const img = new Image();
 			img.onload = resolve;
 			img.src = src;
+			img.style.width = "100%";
+			img.style.height = "100%";
+			img.style.position = 'absolute';
+			img.style.top = 0;
+			img.style.left = 0;
 			cb(img);
 		});
 	}
@@ -154,7 +159,6 @@
 		sectionThresholds.push(runningTop);
 		runningTop += stackH(section.id) + window.innerHeight
 	}
-	console.log(sectionThresholds)
 	// calculate document height needed for dummy
 	const dummyH = runningTop// sections.reduce((h, s, i) => h + s.sectionH, 0);
 	
@@ -181,11 +185,8 @@
 		const tOffset = layerGap; // to swap out the placeholder before reaching the layers
 		const isPastThreshold = (threshold) => scrollY <= threshold;
 		let idx = sectionThresholds.findIndex((t) => isPastThreshold(t - tOffset));
-		console.clear()
-		console.log(sectionThresholds)
 		if (idx < 1) idx = 1;
 		if (idx < 0) idx = sections.length - 1;
-		console.table({scrollY, idx, threshold: sectionThresholds[idx]});
 		updateVisibleSections([idx - 1, idx]);
 	}
 
@@ -266,7 +267,7 @@
 			{#if sections[bottomSectionIdx].component != null}
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
-				<Full section={sections[bottomSectionIdx]} {scrollY} on:scrollend={handleScrollEnd}/>
+				<Full section={sections[bottomSectionIdx]} {scrollY}/>
 			{/if}
 		</div>
 	</div>

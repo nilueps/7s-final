@@ -5,7 +5,10 @@
 	export let scrollY;
 	const { easing, layerGap } = getContext("stackVars");
 
+	let stack;
 	let layerRefs = [];
+
+	$:images = section.layers;
 
 	function isBigJump(a, b) {
 		const A = Math.abs(Math.max(a, b));
@@ -21,7 +24,8 @@
 		const tops = [];
 		return () => {
 			//const y = scrollY;
-			layerRefs.forEach((layer, index) => {
+			stack.childNodes.forEach((layer, index) => {
+				layer.style.zIndex = -index;
 				let top = scrollY - layerTop(index);
 				if (top < 0) top = 0;
 				// else top = window.innerHeight;
@@ -37,11 +41,27 @@
 
 	let updateLayerStyles;
 	beforeUpdate(() => {
+		if (stack != null) {
+			if (stack.hasChildNodes) {
+						if (stack.firstChild != images[0]) {
+							const current = stack.childNodes
+							for (let [i, image] of images.entries()) {
+								stack.replaceChild(image, current[i]);
+							}
+						}
+					} else {
+						for (let image of images) {
+							stack.appendChild(image);
+						}
+					}
+		}
+		
 		if (updateLayerStyles != null && section.layers != null)
 			updateLayerStyles();
-	});
+	});	
 
 	onMount(() => {
+		images.forEach((image) => stack.appendChild(image))
 		updateLayerStyles = layerStyleUpdater();
 	});
 </script>
@@ -60,27 +80,14 @@
 		width: 100%;
 		height: 100vh;
 	}
-	.layer > img {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-/* 
-	.layer img {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-	} */
 </style>
 
-<div id="stack" class="stack">
-	{#if section.layers != null}
-		{#each section.layers as img, index}
+<div bind:this="{stack}" id="stack" class="stack">
+	<!-- {#if section.layers != null}
+		{#each section.layers as Img, index}
 			<div bind:this="{layerRefs[index]}" class="layer" style="z-index: {-index};">
-				<img width="100%" height="100%" src={img.src} alt="fragment" />
+				<Img />
 			</div>
 		{/each}
-	{/if}
+	{/if} -->
 </div>
