@@ -1,18 +1,23 @@
 <script>
-    import { onMount } from "svelte";
-
     export let text = "seven spaces";
-
-    let landing, title;
-
-    let jitter;
-    // animation variables
-    onMount(() => {
-        jitter = function() {
-            let copies = [];
+    function jitter(node) {
+        let alreadyCalled = false;
+        let copies = [];
+        function doJitter() {
+            if (alreadyCalled) return;
+            alreadyCalled = true;
+            const title = node.firstChild;
             const nCopies = 40;
             const t = 40; // time per copy
             const reveal = 500; // t
+            const hideEle = (node) => (node.style.visibility = "hidden");
+            const showEle = (node) => (node.style.visibility = "visible");
+            const clearCopies = () => {
+                copies.forEach((copy) => copy.remove());
+                copies.length = 0;
+                title.style.opacity = 1;
+            };
+
             title.style.opacity = 0;
             for (let i = 0; i < nCopies; i++) {
                 const copy = document.createElement("p");
@@ -24,27 +29,15 @@
                 copy.style.left = left;
                 copy.style.color = "#fff";
                 setTimeout(() => {
-                    landing.appendChild(copy);
+                    node.appendChild(copy);
                     copies.push(copy);
                     setTimeout(() => hideEle(copy), t);
                 }, t * i);
             }
-            const hideEle = (node) => (node.style.visibility = "hidden");
-            const showEle = (node) => (node.style.visibility = "visible");
-            const clearCopies = () => {
-                copies.forEach((copy) => copy.remove());
-                copies.length = 0;
-                title.style.opacity = 1;
-            };
             setTimeout(() => copies.forEach(showEle), nCopies * t + reveal);
             setTimeout(() => clearCopies(), nCopies * t + reveal + reveal);
-        };
-    });
-    let hasPlayed = false;
-    function handleMouseMove() {
-        if (jitter == null || hasPlayed) return;
-        jitter()
-        hasPlayed = true;
+        }
+        node.addEventListener("mousemove", () => doJitter());
     }
 </script>
 
@@ -73,6 +66,4 @@
     }
 </style>
 
-<div class="landing" bind:this={landing} on:mousemove={handleMouseMove}>
-    <span class="title" bind:this={title}>{text}</span>
-</div>
+<div class="landing" use:jitter><span class="title">{text}</span></div>

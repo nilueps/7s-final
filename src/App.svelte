@@ -1,23 +1,12 @@
 <script>
 	import { onMount, setContext } from "svelte";
 	import About from "./About.svelte";
-import Full from "./Full.svelte";
+	import Full from "./Full.svelte";
 	import Landing from "./Landing.svelte";
-	import Page0 from "./Page0.svelte";
-	import Page1 from "./Page1.svelte";
-	import Page2 from "./Page2.svelte";
-	import Page3 from "./Page3.svelte";
-	import Page4 from "./Page4.svelte";
-	import Page5 from "./Page5.svelte";
-	import Page6 from "./Page6.svelte";
-	import Section from "./Section.svelte";
-import Stack from "./Stack.svelte";
+	import Stack from "./Stack.svelte";
 
 	//
 	// component refs
-	//
-	//
-	// asset preload
 	//
 	const sections = [
 		{
@@ -26,8 +15,8 @@ import Stack from "./Stack.svelte";
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			yScale: 1.0,
-			component: Landing
+			fullScale: 1,
+			component: Landing,
 		},
 		{
 			id: 1,
@@ -36,7 +25,7 @@ import Stack from "./Stack.svelte";
 			isSpecial: false,
 			variation: "double",
 			layerCount: 7,
-			yScale: 2.0,
+			fullScale: 2.0,
 		},
 		{
 			id: 2,
@@ -45,7 +34,7 @@ import Stack from "./Stack.svelte";
 			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
-			yScale: 2.0,
+			fullScale: 1.0,
 		},
 		{
 			id: 3,
@@ -54,7 +43,7 @@ import Stack from "./Stack.svelte";
 			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
-			yScale: 2.0,
+			fullScale: 1.0,
 		},
 		{
 			id: 4,
@@ -63,7 +52,7 @@ import Stack from "./Stack.svelte";
 			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
-			yScale: 2.0,
+			fullScale: 1.0,
 		},
 		{
 			id: 5,
@@ -72,7 +61,7 @@ import Stack from "./Stack.svelte";
 			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
-			yScale: 2.0,
+			fullScale: 1.0,
 		},
 		{
 			id: 6,
@@ -81,7 +70,7 @@ import Stack from "./Stack.svelte";
 			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
-			yScale: 2.0,
+			fullScale: 1.0,
 		},
 		{
 			id: 7,
@@ -90,7 +79,7 @@ import Stack from "./Stack.svelte";
 			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
-			yScale: 2.0,
+			fullScale: 1.0,
 		},
 		{
 			id: 8,
@@ -99,15 +88,14 @@ import Stack from "./Stack.svelte";
 			isSpecial: true,
 			variation: "full",
 			layerCount: 0,
-			yScale: 2.0,
-			component: About
+			fullScale: 1.0,
+			component: About,
 		},
 	];
-	//
-	// stack vars
-	//
-	const layerGap = 200;
 
+	//
+	// asset preload
+	//
 	function preloadImg(src, cb) {
 		return new Promise((resolve) => {
 			const img = new Image();
@@ -127,11 +115,12 @@ import Stack from "./Stack.svelte";
 			const path = `img/${section.id}_${section.folder}/`;
 			const fullPath = path + `${section.id}_${section.variation}.png`;
 			const setFullProp = (img) => (section.full = img);
+			section.full = null;
 			promises.push(preloadImg(fullPath, setFullProp));
 
+			section.layers = [];
 			for (let j = 1; j < section.layerCount + 1; j++) {
 				const layerPath = path + `${section.id}_${j}.png`;
-				if (!section.layers) section.layers = [];
 				const setLayerProp = (img) =>
 					(section.layers = [...section.layers, img]);
 				promises.push(preloadImg(layerPath, setLayerProp));
@@ -141,62 +130,61 @@ import Stack from "./Stack.svelte";
 	}
 
 	//
-	// Scrollbar dummy
-	//
-	const featureH = (i) => sections[i].yScale * window.innerHeight;
-	const layersH = (i) => sections[i].layerCount * layerGap;
-	const sectionH = (i) => featureH(i) + layersH(i);
-
-	// calculate document height needed for dummy
-	const dummyH = sections.reduce((h, _, i) => h + sectionH(i), 0);
-	// calculate section thresholds
-	const thresholds = []; // populated onMount with section 'tops'
-	for (let i = 0, y = 0; y < dummyH; y += sectionH(i), i++) {
-		thresholds.push(y);
-	}
-	//
 	// global 	context vars
 	//
-	const easing = "top ease 200ms"
-	setContext("stackVars", { layerGap, thresholds, easing });
+	const layerGap = 200;
+	const easing = "top ease 300ms";
+	setContext("stackVars", { layerGap, easing });
+
+	//
+	// Scrollbar dummy
+	//
+	const fullH = (i) => sections[i].fullScale * window.innerHeight;
+	const stackH = (i) => sections[i].layerCount * layerGap;//sections[i].layerCount > 0 ? window.innerHeight : 0;
+	const sectionH = (i) => fullH(i) + stackH(i);
+
+
+	// calculate section thresholds
+	const sectionThresholds = []; // populated onMount with section 'tops'
+	let runningTop = 0;
+	for (let section of sections) {
+		section.fullTop = runningTop;
+		section.stackTop = section.fullTop + fullH(section.id) - window.innerHeight;
+		section.sectionH = sectionH(section.id);
+		sectionThresholds.push(runningTop);
+		runningTop += section.sectionH - window.innerHeight//= section.stackTop + stackH(section.id);
+	}
+	console.log(sectionThresholds)
+	// calculate document height needed for dummy
+	const dummyH = runningTop// sections.reduce((h, s, i) => h + s.sectionH, 0);
+	
 	//
 	// Scroll logic
 	//
-	let topProps = sections[0];
-	let bottomProps = sections[1];
-	
+
 	let ticking = false,
-		scrollY = 0,
-		topOffset = 0,
-		bottomOffset = 0;
+		scrollY = 0;
 
+	let topSectionIdx = 0;
+	let bottomSectionIdx = 1;
 
-	function updateVisibleStacks(indices) {
-		topProps = sections[indices[0]];
-		bottomProps = sections[indices[1]];
-		topProps.offset = topOffset;
-		bottomProps.offset = bottomOffset;
-	}
-
-	function calcSectionOffsets(indices) {
-		topOffset = scrollY - thresholds[indices[0]];
-		bottomOffset = topOffset - window.innerHeight;
+	function updateVisibleSections(indices) {
+		topSectionIdx = indices[0];
+		bottomSectionIdx = indices[1];
 	}
 
 	function updateStack() {
 		ticking = false;
 		scrollY = window.scrollY;
 		if (!dummyH) return;
-		// update visible components
-		const tOffset = layerGap; // to swap out the placeholder before reaching the layers
+		// compute visible components
+		const tOffset = 0;//layerGap; // to swap out the placeholder before reaching the layers
 		const isPastThreshold = (threshold) => scrollY <= threshold;
-		let idx = thresholds.findIndex((t) => isPastThreshold(t - tOffset));
+		let idx = sectionThresholds.findIndex((t) => isPastThreshold(t - tOffset));
+		console.log(scrollY, idx, sectionThresholds[idx])
 		if (idx < 1) idx = 1;
 		if (idx < 0) idx = sections.length - 1;
-		const visibleIndices = [idx - 1, idx];
-
-		calcSectionOffsets(visibleIndices);
-		updateVisibleStacks(visibleIndices);
+		updateVisibleSections([idx - 1, idx]);
 	}
 
 	const handleScroll = (evt) => {
@@ -261,17 +249,17 @@ import Stack from "./Stack.svelte";
 {:then _}
 	<div class="dummy" style="height: {dummyH}px">
 		<div class="top">
-			{#if topProps.component != null}
-				<svelte:component this={topProps.component}/>
+			{#if sections[topSectionIdx].component != null}
+				<svelte:component this={sections[topSectionIdx].component} />
 			{:else}
-				<Stack props={topProps}/>
+				<Stack section={sections[topSectionIdx]} {scrollY} />
 			{/if}
 		</div>
 		<div class="bottom">
-			{#if bottomProps.component != null}
-				<svelte:component this={bottomProps.component}/>
+			{#if sections[bottomSectionIdx].component != null}
+				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
-				<Full props={bottomProps}/>
+				<Full section={sections[bottomSectionIdx]} {scrollY} />
 			{/if}
 		</div>
 	</div>

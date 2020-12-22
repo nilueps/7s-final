@@ -1,46 +1,30 @@
 <script>
     import { getContext, beforeUpdate, onMount, onDestroy } from "svelte";
 
-    export let props;
-    $: offset = props.offset;
-    const { easing } = getContext("stackVars")
-
-
+    export let section;
+    export let scrollY;
+    // const { easing } = getContext("stackVars");
 
     let fullRef;
-    const fullH = window.innerHeight * props.yScale;
-
-    function isBigJump(a, b) {
-        const A = Math.abs(Math.max(a, b));
-        const B = Math.abs(Math.min(a, b));
-        return A - B >= 0.8 * window.innerHeight;
-    }
-
-    function layerTop() {
-        if (offset > window.innerHeight) {
-            return offset - window.innerHeight;
-        } else {
-            return 0;
-        }
-    }
+    let fullH;
 
     function styleUpdater() {
-        const tops = [];
         return () => {
-            const top = offset;
+            console.log(section.fullTop)
+            let top = (scrollY < section.fullTop) ? 0 : scrollY - section.fullTop;
             fullRef.style.top = -top + "px";
-            fullRef.style.transition = easing;
+            // fullRef.style.transition = easing;
         };
     }
 
     let updateLayerStyles;
     beforeUpdate(() => {
+        fullH = window.innerHeight * section.fullScale;
         if (updateLayerStyles != null) updateLayerStyles();
     });
 
     onMount(() => {
         updateLayerStyles = styleUpdater();
-        fullRef.appendChild(props.full);
     });
 </script>
 
@@ -52,10 +36,13 @@
         width: 100%;
         font-size: 3rem;
     }
-    .full img {
-			width: 100vw;
-			height: auto;
-		}
+	.full > img {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 </style>
 
-<div bind:this={fullRef} class="full" style="height: {fullH}px;"><img src={props.full.src} alt="placeholder"/></div>
+<div bind:this={fullRef} class="full" style="height: {fullH}px;">
+    <img width="100%" height="100%" src={section.full.src} alt="placeholder" />
+</div>

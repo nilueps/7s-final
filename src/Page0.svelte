@@ -14,7 +14,7 @@
 </script>
 
 {#if isTop}
-    <Stack {layers} {props} />
+    <Stack {layers}section{props} />
 {:else}
-    <Full {full} {props} />
+    <Full {full}section{props} />
 {/if}

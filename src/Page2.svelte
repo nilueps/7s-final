@@ -12,4 +12,4 @@
     const layers = new Array(layerCount).fill().map((_, i) => path + `${num}_${i + 1}.png`);
 </script>
 
-<Stack {mask} {offset} {props} {full} {layers} />
+<Stack {mask} {offset}section{props} {full} {layers} />
