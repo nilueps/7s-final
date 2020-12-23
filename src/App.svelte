@@ -247,7 +247,8 @@
 	</style>
 </svelte:head>
 <svelte:window on:scroll={handleScroll} />
-{#await preloadAll()}
+<Loading/>
+<!-- {#await preloadAll()}
 	<Loading />
 {:then _}
 	<div class="dummy" style="height: {dummyH}px">
@@ -267,4 +268,4 @@
 			{/if}
 		</div>
 	</div>
-{/await}
+{/await} -->

@@ -24,7 +24,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        animation: pulse 2s infinite;
+        animation: pulse 1500ms infinite;
     }
 
     @keyframes pulse {
@@ -45,6 +45,12 @@
         }
         25% {
             transform: rotate(-2deg);
+        }
+        30% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(0deg);
         }
     }
 </style>
