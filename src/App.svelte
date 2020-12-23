@@ -267,7 +267,8 @@
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
 				<Full section={sections[bottomSectionIdx]} {scrollY} on:scrollend={handleScrollEnd}/>
-			{/if}
+				<Stack section={sections[topSectionIdx]} {scrollY} visible={false}/>
+				{/if}
 		</div>
 	</div>
 {/await}
