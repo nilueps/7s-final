@@ -48,7 +48,7 @@
 			title: "fork razor",
 			folder: "forkrazor",
 			variation: "full",
-			layerCount: 7,
+			layerCount: 8,
 			fullScale: 1.0,
 		},
 		{
