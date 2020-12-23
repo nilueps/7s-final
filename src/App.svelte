@@ -3,7 +3,7 @@
 	import About from "./About.svelte";
 	import Full from "./Full.svelte";
 	import Landing from "./Landing.svelte";
-import Loading from "./Loading.svelte";
+	import Loading from "./Loading.svelte";
 	import Stack from "./Stack.svelte";
 
 	//
@@ -184,7 +184,6 @@ import Loading from "./Loading.svelte";
 		if (!ticking) requestAnimationFrame(updateStack);
 		ticking = true;
 	};
-
 </script>
 
 <style>
@@ -239,7 +238,7 @@ import Loading from "./Loading.svelte";
 </svelte:head>
 <svelte:window on:scroll={handleScroll} />
 {#await preloadAll()}
-	<Loading/>
+	<Loading />
 {:then _}
 	<div class="dummy" style="height: {dummyH}px">
 		<div class="top">
