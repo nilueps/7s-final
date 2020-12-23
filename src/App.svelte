@@ -140,24 +140,23 @@
 	// Scrollbar dummy
 	//
 	const fullH = (i) => sections[i].fullScale * window.innerHeight;
-	const stackH = (i) => sections[i].layerCount * layerGap;//sections[i].layerCount > 0 ? window.innerHeight : 0;
+	const stackH = (i) => sections[i].layerCount * layerGap; //sections[i].layerCount > 0 ? window.innerHeight : 0;
 	const sectionH = (i) => fullH(i) + stackH(i);
-
 
 	// calculate section thresholds
 	const sectionThresholds = []; // populated with section 'tops'
 	let runningTop = 0;
 	for (let section of sections) {
 		section.fullTop = runningTop;
-		section.stackTop = section.fullTop + fullH(section.id) - window.innerHeight;
+		section.stackTop =
+			section.fullTop + fullH(section.id) - window.innerHeight;
 		runningTop = section.stackTop;
 		sectionThresholds.push(runningTop);
-		runningTop += stackH(section.id) + window.innerHeight
+		runningTop += stackH(section.id) + window.innerHeight;
 	}
-	console.log(sectionThresholds)
 	// calculate document height needed for dummy
-	const dummyH = runningTop// sections.reduce((h, s, i) => h + s.sectionH, 0);
-	
+	const dummyH = runningTop; // sections.reduce((h, s, i) => h + s.sectionH, 0);
+
 	//
 	// Scroll logic
 	//
@@ -180,12 +179,11 @@
 		// compute visible components
 		const tOffset = layerGap; // to swap out the placeholder before reaching the layers
 		const isPastThreshold = (threshold) => scrollY <= threshold;
-		let idx = sectionThresholds.findIndex((t) => isPastThreshold(t - tOffset));
-		console.clear()
-		console.log(sectionThresholds)
+		let idx = sectionThresholds.findIndex((t) =>
+			isPastThreshold(t - tOffset)
+		);
 		if (idx < 1) idx = 1;
 		if (idx < 0) idx = sections.length - 1;
-		console.table({scrollY, idx, threshold: sectionThresholds[idx]});
 		updateVisibleSections([idx - 1, idx]);
 	}
 
@@ -194,10 +192,7 @@
 		ticking = true;
 	};
 
-	function handleScrollEnd() {
-
-	}
-
+	function handleScrollEnd() {}
 </script>
 
 <style>
@@ -259,16 +254,22 @@
 			{#if sections[topSectionIdx].component != null}
 				<svelte:component this={sections[topSectionIdx].component} />
 			{:else}
-				<Stack section={sections[topSectionIdx]} {scrollY} />
+				<Stack section={sections[topSectionIdx]} {scrollY} visible={true}/>
 			{/if}
 		</div>
 		<div class="bottom">
 			{#if sections[bottomSectionIdx].component != null}
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
-				<Full section={sections[bottomSectionIdx]} {scrollY} on:scrollend={handleScrollEnd}/>
-				<Stack section={sections[topSectionIdx]} {scrollY} visible={false}/>
-				{/if}
+				<Full
+					section={sections[bottomSectionIdx]}
+					{scrollY}
+					on:scrollend={handleScrollEnd} />
+				<Stack
+					section={sections[topSectionIdx]}
+					{scrollY}
+					visible={false} />
+			{/if}
 		</div>
 	</div>
 {/await}

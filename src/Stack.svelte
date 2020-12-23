@@ -23,6 +23,7 @@
 		return () => {
 			//const y = scrollY;
 			layerRefs.forEach((layer, index) => {
+				if (layer == null) return;
 				let top = scrollY - layerTop(index);
 				if (top < 0) top = 0;
 				// else top = window.innerHeight;
