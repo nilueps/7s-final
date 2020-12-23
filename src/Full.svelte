@@ -28,7 +28,6 @@
 
     let updateLayerStyles;
     beforeUpdate(() => {
-        console.log(scrollY, contentThreshold);
         fullH = window.innerHeight * section.fullScale;
         if (updateLayerStyles != null) updateLayerStyles();
     });
