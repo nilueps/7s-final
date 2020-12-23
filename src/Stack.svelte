@@ -1,51 +1,29 @@
 <script>
-	import { getContext, beforeUpdate, onMount } from "svelte";
+	import { getContext } from "svelte";
 
 	export let section;
 	export let scrollY;
-	export let visible = true;
+	export let newSection;
 	const { easing, layerGap } = getContext("stackVars");
+	$: images = section.layers;
+	$: transition = newSection ? "initial" : easing;
 
-	let layerRefs = [];
-
-	function isBigJump(a, b) {
-		const A = Math.abs(Math.max(a, b));
-		const B = Math.abs(Math.min(a, b));
-		return A - B >= 0.8 * window.innerHeight;
+	function layerTop(n) {
+		return section.stackTop + n * layerGap;
 	}
 
-	function layerTop(index) {
-		return section.stackTop + index * layerGap;
-	}
-
-	function layerStyleUpdater() {
-		const tops = [];
-		return () => {
-			//const y = scrollY;
-			layerRefs.forEach((layer, index) => {
-				if (layer == null) return;
-				let top = scrollY - layerTop(index);
+	function layerStyleUpdater(node, scrollY) {
+		return {
+			update: (scrollY) => {
+				const id = node.dataset.id;
+				const threshold = layerTop(id);
+				let top = scrollY - threshold;
 				if (top < 0) top = 0;
-				// else top = window.innerHeight;
-				layer.style.top = -top + "px";
-				layer.style.transition =
-					tops.length === 0 || isBigJump(tops[index], top)
-						? "initial"
-						: easing;
-				tops[index] = top;
-			});
+				node.style.transition = transition;
+				node.style.top = -top + "px";
+			},
 		};
 	}
-
-	let updateLayerStyles;
-	beforeUpdate(() => {
-		if (updateLayerStyles != null && section.layers != null)
-			updateLayerStyles();
-	});
-
-	onMount(() => {
-		updateLayerStyles = layerStyleUpdater();
-	});
 </script>
 
 <style>
@@ -61,27 +39,23 @@
 		left: 0;
 		width: 100%;
 		height: 100vh;
+		transition: "initial";
 	}
 	.layer > img {
 		position: absolute;
 		top: 0;
 		left: 0;
 	}
-/* 
-	.layer img {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-	} */
 </style>
 
 <div id="stack" class="stack">
-	<!-- <div id="stack" class="stack" style="visibility: {visible ? 'visible' : 'hidden'};"> -->
-	{#if section.layers != null}
-		{#each section.layers as img, index}
-			<div bind:this="{layerRefs[index]}" class="layer" style="z-index: {-index};">
+	{#if images != null}
+		{#each images as img, index}
+			<div
+				use:layerStyleUpdater={scrollY}
+				data-id={index}
+				class="layer"
+				style="z-index: {-index};">
 				<img width="100%" height="100%" src={img.src} alt="fragment" />
 			</div>
 		{/each}

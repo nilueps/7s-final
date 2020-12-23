@@ -1,12 +1,9 @@
 <script>
     const text = "loading";
-    function pulse(node) {
-        
-    }
 </script>
 
 <style>
-    .landing {
+    .loading {
         position: absolute;
         top: 0;
         left: 0;
@@ -27,7 +24,29 @@
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: rotate(2deg);
+        }
+        5% {
+            transform: rotate(-2deg);
+        }
+        10% {
+            transform: rotate(2deg);
+        }
+        15% {
+            transform: rotate(-2deg);
+        }
+        20% {
+            transform: rotate(2deg);
+        }
+        25% {
+            transform: rotate(-2deg);
+        }
     }
 </style>
 
-<div class="landing" use:pulse><span class="title">{text}</span></div>
+<div class="loading"><span class="title">{text}</span></div>

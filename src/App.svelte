@@ -1,5 +1,6 @@
 <script>
 	import { onMount, setContext } from "svelte";
+	import { writable } from "svelte/store"
 	import About from "./About.svelte";
 	import Full from "./Full.svelte";
 	import Landing from "./Landing.svelte";
@@ -159,10 +160,19 @@
 
 	let topSectionIdx = 0;
 	let bottomSectionIdx = 1;
+	let newSection = false;
+	function isSectionChange(indices) {
+		return topSectionIdx !== indices[0]
+	}
 
 	function updateVisibleSections(indices) {
+		if (isSectionChange(indices)) {
+			newSection = true;
 		topSectionIdx = indices[0];
 		bottomSectionIdx = indices[1];
+		} else {
+			newSection = false;
+		}
 	}
 
 	function updateStack() {
@@ -245,7 +255,7 @@
 			{#if sections[topSectionIdx].component != null}
 				<svelte:component this={sections[topSectionIdx].component} />
 			{:else}
-				<Stack section={sections[topSectionIdx]} {scrollY} />
+				<Stack section={sections[topSectionIdx]} {scrollY} {newSection}/>
 			{/if}
 		</div>
 		<div class="bottom">
@@ -253,7 +263,7 @@
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
 				<Full section={sections[bottomSectionIdx]} {scrollY} />
-				<Stack section={sections[bottomSectionIdx]} {scrollY} />
+				<Stack section={sections[bottomSectionIdx]} {scrollY} {newSection}/>
 			{/if}
 		</div>
 	</div>
