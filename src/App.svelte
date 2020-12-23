@@ -3,6 +3,7 @@
 	import About from "./About.svelte";
 	import Full from "./Full.svelte";
 	import Landing from "./Landing.svelte";
+import Loading from "./Loading.svelte";
 	import Stack from "./Stack.svelte";
 
 	//
@@ -22,9 +23,9 @@
 			id: 1,
 			title: "berg intro",
 			folder: "bergintro",
-			variation: "double",
+			variation: "triple",
 			layerCount: 7,
-			fullScale: 2.0,
+			fullScale: 3.0,
 		},
 		{
 			id: 2,
@@ -238,7 +239,7 @@
 </svelte:head>
 <svelte:window on:scroll={handleScroll} />
 {#await preloadAll()}
-	<Landing text="loading" />
+	<Loading/>
 {:then _}
 	<div class="dummy" style="height: {dummyH}px">
 		<div class="top">
