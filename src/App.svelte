@@ -268,6 +268,7 @@
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
 				<Full section={sections[bottomSectionIdx]} {scrollY}/>
+				<Stack section={sections[bottomSectionIdx]} {scrollY} />
 			{/if}
 		</div>
 	</div>
