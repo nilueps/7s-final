@@ -1,11 +1,19 @@
 <script>
-	import { onMount, setContext } from "svelte";
-	import { writable } from "svelte/store"
-	import About from "./About.svelte";
-	import Full from "./Full.svelte";
-	import Landing from "./Landing.svelte";
-	import Loading from "./Loading.svelte";
+	import { setContext } from "svelte";
+
 	import Stack from "./Stack.svelte";
+	import Full from "./Full.svelte";
+
+	import Loading from "./Loading.svelte";
+	import Landing from "./Landing.svelte";
+	import Page1 from "./Page1.svelte";
+	import Page2 from "./Page2.svelte";
+	import Page3 from "./Page3.svelte";
+	import Page4 from "./Page4.svelte";
+	import Page5 from "./Page5.svelte";
+	import Page6 from "./Page6.svelte";
+	import Page7 from "./Page7.svelte";
+	import About from "./About.svelte";
 
 	//
 	// component refs
@@ -17,7 +25,7 @@
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			fullScale: 1,
+			fullScale: 0.5,
 			component: Landing,
 		},
 		{
@@ -27,6 +35,7 @@
 			variation: "triple",
 			layerCount: 7,
 			fullScale: 3.0,
+			content: Page1,
 		},
 		{
 			id: 2,
@@ -35,6 +44,7 @@
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
+			content: Page2,
 		},
 		{
 			id: 3,
@@ -43,6 +53,7 @@
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
+			content: Page3,
 		},
 		{
 			id: 4,
@@ -51,6 +62,7 @@
 			variation: "full",
 			layerCount: 8,
 			fullScale: 1.0,
+			content: Page4,
 		},
 		{
 			id: 5,
@@ -59,6 +71,7 @@
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
+			content: Page5,
 		},
 		{
 			id: 6,
@@ -67,6 +80,7 @@
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
+			content: Page6,
 		},
 		{
 			id: 7,
@@ -75,6 +89,7 @@
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
+			content: Page7,
 		},
 		{
 			id: 8,
@@ -135,7 +150,6 @@
 	//
 	const fullH = (i) => sections[i].fullScale * window.innerHeight;
 	const stackH = (i) => sections[i].layerCount * layerGap; //sections[i].layerCount > 0 ? window.innerHeight : 0;
-	const sectionH = (i) => fullH(i) + stackH(i);
 
 	// calculate section thresholds
 	const sectionThresholds = []; // populated with section 'tops'
@@ -161,15 +175,16 @@
 	let topSectionIdx = 0;
 	let bottomSectionIdx = 1;
 	let newSection = false;
+
 	function isSectionChange(indices) {
-		return topSectionIdx !== indices[0]
+		return topSectionIdx !== indices[0];
 	}
 
 	function updateVisibleSections(indices) {
 		if (isSectionChange(indices)) {
 			newSection = true;
-		topSectionIdx = indices[0];
-		bottomSectionIdx = indices[1];
+			topSectionIdx = indices[0];
+			bottomSectionIdx = indices[1];
 		} else {
 			newSection = false;
 		}
@@ -253,17 +268,23 @@
 	<div class="dummy" style="height: {dummyH}px">
 		<div class="top">
 			{#if sections[topSectionIdx].component != null}
-				<svelte:component this={sections[topSectionIdx].component} />
+				<svelte:component this={sections[topSectionIdx].component} {scrollY} />
 			{:else}
-				<Stack section={sections[topSectionIdx]} {scrollY} {newSection}/>
+				<Stack
+					section={sections[topSectionIdx]}
+					{scrollY}
+					{newSection} />
 			{/if}
 		</div>
 		<div class="bottom">
 			{#if sections[bottomSectionIdx].component != null}
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
-				<Full section={sections[bottomSectionIdx]} {scrollY} />
-				<Stack section={sections[bottomSectionIdx]} {scrollY} {newSection}/>
+				<Full section={sections[bottomSectionIdx]} {scrollY} {newSection} />
+				<Stack
+					section={sections[bottomSectionIdx]}
+					{scrollY}
+					{newSection} />
 			{/if}
 		</div>
 	</div>

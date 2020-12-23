@@ -1,5 +1,11 @@
 <script>
+    import { fade } from "svelte/transition";
+
     export let text = "seven spaces";
+    export let scrollY;
+
+    $: visible = scrollY < 50;
+
     function jitter(node) {
         let alreadyCalled = false;
         let copies = [];
@@ -66,4 +72,6 @@
     }
 </style>
 
-<div class="landing" use:jitter><span class="title">{text}</span></div>
+{#if visible}
+    <div transition:fade class="landing" use:jitter><span class="title">{text}</span></div>
+{/if}
