@@ -22,7 +22,6 @@
 			id: 1,
 			title: "berg intro",
 			folder: "bergintro",
-			isSpecial: false,
 			variation: "double",
 			layerCount: 7,
 			fullScale: 2.0,
@@ -31,7 +30,6 @@
 			id: 2,
 			title: "nd vibra",
 			folder: "ndvibra",
-			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
@@ -40,7 +38,6 @@
 			id: 3,
 			title: "802/Red/B",
 			folder: "red",
-			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
@@ -49,7 +46,6 @@
 			id: 4,
 			title: "fork razor",
 			folder: "forkrazor",
-			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
@@ -58,7 +54,6 @@
 			id: 5,
 			title: "4435, 10, upper",
 			folder: "covid",
-			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
@@ -67,7 +62,6 @@
 			id: 6,
 			title: "ritter, gabo",
 			folder: "ritter",
-			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
@@ -76,7 +70,6 @@
 			id: 7,
 			title: "memory",
 			folder: "memory",
-			isSpecial: false,
 			variation: "full",
 			layerCount: 7,
 			fullScale: 1.0,
@@ -85,7 +78,6 @@
 			id: 8,
 			title: "about",
 			folder: "",
-			isSpecial: true,
 			variation: "full",
 			layerCount: 0,
 			fullScale: 2.0,
@@ -192,7 +184,6 @@
 		ticking = true;
 	};
 
-	function handleScrollEnd() {}
 </script>
 
 <style>
@@ -254,21 +245,15 @@
 			{#if sections[topSectionIdx].component != null}
 				<svelte:component this={sections[topSectionIdx].component} />
 			{:else}
-				<Stack section={sections[topSectionIdx]} {scrollY} visible={true}/>
+				<Stack section={sections[topSectionIdx]} {scrollY} />
 			{/if}
 		</div>
 		<div class="bottom">
 			{#if sections[bottomSectionIdx].component != null}
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
-				<Full
-					section={sections[bottomSectionIdx]}
-					{scrollY}
-					on:scrollend={handleScrollEnd} />
-				<Stack
-					section={sections[topSectionIdx]}
-					{scrollY}
-					visible={false} />
+				<Full section={sections[bottomSectionIdx]} {scrollY} />
+				<Stack section={sections[bottomSectionIdx]} {scrollY} />
 			{/if}
 		</div>
 	</div>

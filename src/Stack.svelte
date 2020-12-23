@@ -77,7 +77,8 @@
 	} */
 </style>
 
-<div id="stack" class="stack" style="visibility: {visible ? 'visible' : 'hidden'};">
+<div id="stack" class="stack">
+	<!-- <div id="stack" class="stack" style="visibility: {visible ? 'visible' : 'hidden'};"> -->
 	{#if section.layers != null}
 		{#each section.layers as img, index}
 			<div bind:this="{layerRefs[index]}" class="layer" style="z-index: {-index};">

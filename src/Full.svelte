@@ -34,6 +34,7 @@
         left: 0;
         width: 100%;
         font-size: 3rem;
+        z-index: 1;
     }
 	.full > img {
 		position: absolute;
