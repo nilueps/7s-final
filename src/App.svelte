@@ -230,6 +230,7 @@
 	}
 
 	.top {
+		pointer-events: none;
 		z-index: 2;
 	}
 
@@ -268,7 +269,9 @@
 	<div class="dummy" style="height: {dummyH}px">
 		<div class="top">
 			{#if sections[topSectionIdx].component != null}
-				<svelte:component this={sections[topSectionIdx].component} {scrollY} />
+				<svelte:component
+					this={sections[topSectionIdx].component}
+					{scrollY} />
 			{:else}
 				<Stack
 					section={sections[topSectionIdx]}
@@ -280,8 +283,11 @@
 			{#if sections[bottomSectionIdx].component != null}
 				<svelte:component this={sections[bottomSectionIdx].component} />
 			{:else}
-				<Full section={sections[bottomSectionIdx]} {scrollY} {newSection} />
 				<Stack
+					section={sections[bottomSectionIdx]}
+					{scrollY}
+					{newSection} />
+				<Full
 					section={sections[bottomSectionIdx]}
 					{scrollY}
 					{newSection} />

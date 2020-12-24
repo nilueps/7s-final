@@ -32,6 +32,7 @@
 		width: 100%;
 		height: 100%;
 		font-size: 3rem;
+		pointer-events: none;
 	}
 
 	.layer {

@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import PlaceholderSvg from './PlaceholderSVG.svelte'
-  import sketch from "./sketch2.js";
-  // onMount(() => sketch("sketch2"));
+  // import sketch from "./sketch2.js";
+  // onMount(() => sketch("sketcharea"));
 
 </script>
 
@@ -12,4 +12,4 @@
   }
 </style>
 
-<div id="sketch2" ><PlaceholderSvg text={"covid"}></PlaceholderSvg></div>
+<div id="sketcharea" ><PlaceholderSvg text={"covid"}/></div>

@@ -44,13 +44,11 @@
         left: 0;
         width: 100%;
         font-size: 3rem;
-        z-index: 1;
     }
     .full > img {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
     }
 
     .content {
@@ -58,7 +56,6 @@
         left: 10vw;
         width: 80vw;
         height: 80vh;
-        z-index: 1;
     }
 </style>
 

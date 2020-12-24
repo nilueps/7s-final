@@ -1,9 +1,5 @@
 <script>
   export let text = "";
-  export let stroke = "lightgrey";
-  export let textColor = "white";
-  export let fill = "none";
-  export let style = "";
 </script>
 
 <style>
