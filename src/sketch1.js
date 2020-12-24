@@ -6,7 +6,6 @@ const sketch = (container) => {
   // eslint-disable-next-line no-undef
   new p5((s) => {
     //global configs
-    p5.disableFriendlyErrors = true;
     //background
     const imgfile = "img/sketch1-bg.jpeg";
     const submatx = 0.5;

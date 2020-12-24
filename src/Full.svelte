@@ -10,7 +10,7 @@
     const contentMarginTop = window.innerHeight * 0.1;
     $: contentTop = 
         section.fullScale > 1 ? window.innerHeight : 0; // ~~margin-top: 10vh
-    $: contentThreshold = -contentMarginTop * 3 + section.fullTop + contentTop / 2;
+    $: contentThreshold = contentTop === 0 ? section.fullTop - window.innerHeight / 2 : section.fullTop + contentTop / 2 ;
     $: showContent =
         scrollY >= contentThreshold &&
         scrollY < contentThreshold + window.innerHeight;
@@ -55,8 +55,7 @@
 
     .content {
         position: absolute;
-        left: 10vh;
-        margin: 0 auto;
+        left: 10vw;
         width: 80vw;
         height: 80vh;
         z-index: 1;

@@ -141,8 +141,8 @@
 	//
 	// global 	context vars
 	//
-	const layerGap = 200;
-	const easing = "top ease 300ms";
+	const layerGap = 40;
+	const easing = "top 300ms cubic-bezier(.55,.06,.68,.19) 0s";
 	setContext("stackVars", { layerGap, easing });
 
 	//

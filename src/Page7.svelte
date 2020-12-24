@@ -8,5 +8,5 @@
 </style>
 
 <div>
-  <PlaceholderSvg text="memory" style="border:1px solid red; border-radius:5px;" fill="mistyrose"/>
+  <PlaceholderSvg text="memory"/>
 </div>
