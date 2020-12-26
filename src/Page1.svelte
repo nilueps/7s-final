@@ -1,9 +1,8 @@
 <script>
-  import { onMount } from 'svelte'
-import PlaceholderSvg from './PlaceholderSVG.svelte';
+  import { onMount } from "svelte";
+  import PlaceholderSvg from "./PlaceholderSVG.svelte";
   // import sketch from "./sketch1.js";
   // onMount(() => sketch("sketchArea"));
-  
 </script>
 
 <style>
@@ -12,4 +11,11 @@ import PlaceholderSvg from './PlaceholderSVG.svelte';
   }
 </style>
 
-<div id="sketchArea"><iframe width='100%' height="100%" style="border: none;" src="https://editor.p5js.org/nilueps/embed/5bj-KqlVF"></iframe></div>
+<div id="sketchArea">
+  <iframe
+    title="berg"
+    width="100%"
+    height="100%"
+    style="border: none;"
+    src="https://editor.p5js.org/intermodal/embed/Z9VmIYhue" />
+</div>

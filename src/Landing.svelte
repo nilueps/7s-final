@@ -1,4 +1,6 @@
 <script>
+import { onMount } from "svelte";
+
     import { fade } from "svelte/transition";
 
     export let text = "seven spaces";
@@ -43,7 +45,7 @@
             setTimeout(() => copies.forEach(showEle), nCopies * t + reveal);
             setTimeout(() => clearCopies(), nCopies * t + reveal + reveal);
         }
-        node.addEventListener("mousemove", () => doJitter());
+        setTimeout(() => doJitter(), 750);
     }
 </script>
 

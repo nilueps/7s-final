@@ -50,19 +50,20 @@
         top: 0;
         left: 0;
     }
-
     .content {
         position: absolute;
-        left: 10vw;
-        width: 80vw;
-        height: 80vh;
+        width: 100%;
+        height: 100vh;
+        padding: 10vh 10vw;
+        background: rgba(12,12,12,.8);
     }
+
 </style>
 
 <div bind:this={fullRef} class="full" style="height: {fullH}px;">
     <img width="100%" height="100%" src={section.full.src} alt="placeholder" />
     {#if showContent}
-        <div transition:fade class="content" style="top: {contentMarginTop + contentTop}px;">
+        <div transition:fade class="content" style="top: {contentTop}px;">
             <svelte:component this={section.content} />
         </div>
     {/if}

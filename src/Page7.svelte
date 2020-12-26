@@ -1,5 +1,6 @@
 <script>
   import PlaceholderSvg from './PlaceholderSVG.svelte';
+import VimeoIframe from './VimeoIframe.svelte';
 </script>
 <style>
   div {
@@ -8,5 +9,5 @@
 </style>
 
 <div>
-  <PlaceholderSvg text="memory"/>
+  <VimeoIframe title="memory" src="https://player.vimeo.com/video/494016761"/>
 </div>
