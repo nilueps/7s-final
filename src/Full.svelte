@@ -55,14 +55,21 @@
         width: 100%;
         height: 100vh;
         padding: 10vh 10vw;
+    }
+    .shade {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
         background: rgba(12,12,12,.8);
     }
-
 </style>
 
 <div bind:this={fullRef} class="full" style="height: {fullH}px;">
     <img width="100%" height="100%" src={section.full.src} alt="placeholder" />
     {#if showContent}
+        <div transition:fade class="shade"></div>
         <div transition:fade class="content" style="top: {contentTop}px;">
             <svelte:component this={section.content} />
         </div>
