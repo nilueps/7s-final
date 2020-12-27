@@ -122,7 +122,7 @@
 				continue;
 
 			const path = `img/${section.id}_${section.folder}/`;
-			const fullPath = 'img/' + `${section.id}_${section.folder}.jpg`;
+			const fullPath = path + `${section.id}_full.jpg`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
 			promises.push(preloadImg(fullPath, setFullProp));
