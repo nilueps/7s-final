@@ -1,13 +1,11 @@
 <script>
-    import { getContext, beforeUpdate, onMount, onDestroy } from "svelte";
+    import { getContext, beforeUpdate, onMount } from "svelte";
     import { fade } from "svelte/transition";
 
     export let section;
     export let scrollY;
     export let newSection;
-    const { easing } = getContext("stackVars");
     $: transition = newSection ? "initial" : "top ease 200ms";
-    const contentMarginTop = window.innerHeight * 0.1;
     $: contentTop = 
         section.fullScale > 1 ? window.innerHeight : 0; // ~~margin-top: 10vh
     $: contentThreshold = contentTop === 0 ? section.fullTop - window.innerHeight / 2 : section.fullTop + contentTop / 2 ;

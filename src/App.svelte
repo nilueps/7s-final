@@ -34,7 +34,7 @@
 			folder: "bergintro",
 			variation: "triple",
 			layerCount: 7,
-			fullScale: 3.0,
+			fullScale: 4.0,
 			content: Page1,
 		},
 		{
@@ -43,7 +43,7 @@
 			folder: "ndvibra",
 			variation: "full",
 			layerCount: 7,
-			fullScale: 1.0,
+			fullScale: 4.0,
 			content: Page2,
 		},
 		{
@@ -52,7 +52,7 @@
 			folder: "red",
 			variation: "full",
 			layerCount: 7,
-			fullScale: 1.0,
+			fullScale: 4.0,
 			content: Page3,
 		},
 		{
@@ -61,7 +61,7 @@
 			folder: "forkrazor",
 			variation: "full",
 			layerCount: 8,
-			fullScale: 1.0,
+			fullScale: 4.0,
 			content: Page4,
 		},
 		{
@@ -70,7 +70,7 @@
 			folder: "covid",
 			variation: "full",
 			layerCount: 7,
-			fullScale: 1.0,
+			fullScale: 4.0,
 			content: Page5,
 		},
 		{
@@ -79,7 +79,7 @@
 			folder: "ritter",
 			variation: "full",
 			layerCount: 7,
-			fullScale: 1.0,
+			fullScale: 4.0,
 			content: Page6,
 		},
 		{
@@ -88,7 +88,7 @@
 			folder: "memory",
 			variation: "full",
 			layerCount: 7,
-			fullScale: 1.0,
+			fullScale: 4.0,
 			content: Page7,
 		},
 		{
@@ -122,7 +122,7 @@
 				continue;
 
 			const path = `img/${section.id}_${section.folder}/`;
-			const fullPath = path + `${section.id}_${section.variation}.png`;
+			const fullPath = 'img/' + `${section.id}_${section.folder}.jpg`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
 			promises.push(preloadImg(fullPath, setFullProp));
