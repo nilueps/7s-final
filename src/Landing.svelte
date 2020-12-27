@@ -72,8 +72,15 @@ import { onMount } from "svelte";
         transform: translate(-50%, -50%);
         text-align: center;
     }
+
+    .chevron-icon {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0);
+    }
 </style>
 
 {#if visible}
-    <div transition:fade class="landing" use:jitter><span class="title">{text}</span></div>
+    <div transition:fade class="landing" use:jitter><span class="title">{text}</span><img width="50px" height="auto" class="chevron-icon" src="/img/chevron_down.svg" alt="down arrow" /></div>
 {/if}
