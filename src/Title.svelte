@@ -6,7 +6,7 @@
     h2 {
         text-align: left;
         font-style: italic;
-        letter-spacing: 1.5rem;
+        letter-spacing: 1.25rem;
         font-size: 2rem;
         margin-bottom: 2rem;
         margin-left: 5rem;
