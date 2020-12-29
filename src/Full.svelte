@@ -1,14 +1,17 @@
 <script>
     import { getContext, beforeUpdate, onMount } from "svelte";
     import { fade } from "svelte/transition";
+    import Title from "./Title.svelte";
 
     export let section;
     export let scrollY;
     export let newSection;
     $: transition = newSection ? "initial" : "top ease 200ms";
-    $: contentTop = 
-        section.fullScale > 1 ? window.innerHeight : 0; // ~~margin-top: 10vh
-    $: contentThreshold = contentTop === 0 ? section.fullTop - window.innerHeight / 2 : section.fullTop + contentTop / 2 ;
+    $: contentTop = section.fullScale > 1 ? window.innerHeight : 0; // ~~margin-top: 10vh
+    $: contentThreshold =
+        contentTop === 0
+            ? section.fullTop - window.innerHeight / 2
+            : section.fullTop + contentTop / 2;
     $: showContent =
         scrollY >= contentThreshold &&
         scrollY < contentThreshold + window.innerHeight;
@@ -18,6 +21,7 @@
 
     function styleUpdater() {
         return () => {
+            if (fullRef == null) return;
             let top = scrollY < section.fullTop ? 0 : scrollY - section.fullTop;
             fullRef.style.top = -top + "px";
             fullRef.style.transition = transition;
@@ -36,6 +40,12 @@
 </script>
 
 <style>
+    .noshowcase {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
     .full {
         position: absolute;
         top: 0;
@@ -60,15 +70,32 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(12,12,12,.8);
+        background: rgba(12, 12, 12, 0.8);
     }
 </style>
 
 <div bind:this={fullRef} class="full" style="height: {fullH}px;">
-    <img width="100%" height="100%" src={section.full.src} alt="placeholder" />
-    {#if showContent}
-        <div transition:fade class="shade"></div>
-        <div transition:fade class="content" style="top: {contentTop}px;">
+    {#if section.noShowcase == null}
+        {#if section.full != null}
+            <img
+                width="100%"
+                height="100%"
+                src={section.full.src}
+                alt="placeholder" />
+        {/if}
+        {#if showContent}
+            <div transition:fade class="shade" />
+            <div transition:fade class="content" style="top: {contentTop}px;">
+                <div class="blank" />
+                <Title title={section.title} />
+                <svelte:component this={section.content} />
+            </div>
+        {/if}
+    {:else}
+        <div
+            transition:fade
+            class="noshowcase"
+            style="top: 0px;">
             <svelte:component this={section.content} />
         </div>
     {/if}

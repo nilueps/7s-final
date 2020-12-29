@@ -82,5 +82,5 @@ import { onMount } from "svelte";
 </style>
 
 {#if visible}
-    <div transition:fade class="landing" use:jitter><span class="title">{text}</span><img width="50px" height="auto" class="chevron-icon" src="/img/chevron_down.svg" alt="down arrow" /></div>
+    <div transition:fade class="landing" use:jitter><span class="title">{text}</span><img width="40px" height="auto" class="chevron-icon" src="/img/chevron_down.svg" alt="down arrow" /></div>
 {/if}

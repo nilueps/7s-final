@@ -97,7 +97,7 @@
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			fullScale: 3.0,
+			fullScale: 4.0,
 			noShowcase: true,
 			content: About,
 		},
@@ -142,8 +142,8 @@
 	//
 	// global 	context vars
 	//
-	const layerGap = 40;
-	const easing = "top 300ms cubic-bezier(.55,.06,.68,.19) 0s";
+	const layerGap = 300;
+	const easing = "top ease 200ms";// cubic-bezier(.55,.06,.68,.19) 0s";
 	setContext("stackVars", { layerGap, easing });
 
 	//
@@ -196,7 +196,7 @@
 		scrollY = window.scrollY;
 		if (!dummyH) return;
 		// compute visible components
-		const tOffset = layerGap; // to swap out the placeholder before reaching the layers
+		const tOffset = 0//layerGap; // to swap out the placeholder before reaching the layers
 		const isPastThreshold = (threshold) => scrollY <= threshold;
 		let idx = sectionThresholds.findIndex((t) =>
 			isPastThreshold(t - tOffset)

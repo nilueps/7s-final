@@ -19,7 +19,7 @@
 				const threshold = layerTop(id);
 				let top = scrollY - threshold;
 				if (top < 0) top = 0;
-				else top = window.innerHeight;
+				//else top = window.innerHeight;
 				node.style.transition = transition;
 				node.style.top = -top + "px";
 			},
