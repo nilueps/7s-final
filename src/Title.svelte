@@ -6,8 +6,9 @@
     h2 {
         text-align: center;
         font-style: italic;
-        font-size: 20rem;
-        margin-bottom: 10rem;
+        letter-spacing: 3rem;
+        font-size: 15rem;
+        margin-bottom: 20rem;
         margin-left: 5rem;
     }
 </style>
