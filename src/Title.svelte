@@ -4,11 +4,11 @@
 
 <style>
     h2 {
-        text-align: center;
+        text-align: left;
         font-style: italic;
-        letter-spacing: 3rem;
-        font-size: 15rem;
-        margin-bottom: 20rem;
+        letter-spacing: 1.5rem;
+        font-size: 2rem;
+        margin-bottom: 2rem;
         margin-left: 5rem;
     }
 </style>
