@@ -4,9 +4,10 @@
 
 <style>
     h2 {
-        text-align: left;
-        font-size: 1rem;
-        margin-bottom: 1rem;
+        text-align: center;
+        font-style: italic;
+        font-size: 20rem;
+        margin-bottom: 10rem;
         margin-left: 5rem;
     }
 </style>

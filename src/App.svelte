@@ -249,7 +249,8 @@
 
 		* {
 			box-sizing: border-box;
-			font-family: "Rubik", monospace;
+			/* font-family: "Rubik", monospace; */
+			font-family: 'Alegreya', serif;
 			line-height: 1.2;
 			margin: 0;
 			padding: 0;
