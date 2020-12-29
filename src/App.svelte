@@ -30,7 +30,7 @@
 		},
 		{
 			id: 1,
-			title: "berg intro",
+			title: "206/754",
 			folder: "bergintro",
 			variation: "triple",
 			layerCount: 3,

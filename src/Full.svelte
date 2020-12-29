@@ -14,8 +14,9 @@
             : section.fullTop + contentTop / 2;
     $: showContent =
         scrollY >= contentThreshold &&
-        scrollY < contentThreshold + window.innerHeight;
-
+        scrollY < contentThreshold + window.innerHeight + window.innerHeight;
+    $: showTitle =
+        scrollY >= contentThreshold && scrollY < contentThreshold + window.innerHeight * 0.4;
     let fullRef;
     let fullH;
 
@@ -89,7 +90,7 @@
             <div transition:fade class="shade" />
             <div transition:fade class="content" style="top: {contentTop}px;">
                 <div class="blank" />
-                <Title title={section.title} />
+                    <Title {showTitle} title={section.title} />
                 <svelte:component this={section.content} />
             </div>
         {/if}

@@ -6,6 +6,8 @@ import { onMount } from "svelte";
     export let text = "seven spaces";
     export let scrollY;
 
+    let showChevron = false;
+
     $: visible = scrollY < 50;
 
     function jitter(node) {
@@ -47,6 +49,7 @@ import { onMount } from "svelte";
         }
         setTimeout(() => doJitter(), 750);
     }
+    onMount(() => setTimeout(() => showChevron = true, 2000))
 </script>
 
 <style>
@@ -82,5 +85,9 @@ import { onMount } from "svelte";
 </style>
 
 {#if visible}
-    <div transition:fade class="landing"><span class="title">{text}</span><img width="40px" height="auto" class="chevron-icon" src="/img/chevron_down.svg" alt="down arrow" /></div>
+    <div transition:fade class="landing"><span class="title">{text}</span>
+        {#if showChevron}
+        <img transition:fade width="70px" height="auto" class="chevron-icon" src="/img/chevron_down.svg" alt="down arrow" />
+        {/if}
+    </div>
 {/if}
