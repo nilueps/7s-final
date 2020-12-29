@@ -3,12 +3,11 @@
         height: 400vh;
         text-align: center;
         padding: 10vh 10vw;
-        padding-top: 50vh;
         background: black;
     }
 
     .subsection {
-        margin: 10rem auto;
+        margin: 20rem auto;
     }
 
     .about-7s {
@@ -18,7 +17,7 @@
     h2 {
         text-align: center;
         font-size: 2rem;
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
     }
     p {
         font-size: 1rem;
@@ -53,18 +52,22 @@
     a:visited {
         color: #48b68d;
     }
-    .sources thead {
+    .materials table {
+        margin: 0 10vw;
+        margin-top: 5rem;
+    }
+    .materials thead {
         font-size: 1.5rem;
         text-align: center;
-        background-color: rgb(48, 48, 48);
+        background-color: rgb(29, 29, 29);
     }
-    .sources th {
+    .materials th {
         padding: 0.5rem 1rem;
     }
-    .sources td {
+    .materials td {
         padding: 0.5rem 0.5rem;
         text-align: center;
-        background-color: rgb(49, 49, 49);
+        background-color: rgb(14, 14, 14);
     }
     .link {
         height: 1rem;
@@ -73,11 +76,6 @@
 </style>
 
 <section class="about">
-    <div class="subsection about-7s">
-        <h2>about seven spaces</h2>
-        <p>Seven Spaces is a multimedia album for the web.</p>
-        <p>The audio can be purchased or streamed at Bandcamp.</p>
-    </div>
 
     <div class="subsection credits">
         <h2>credits</h2>
@@ -197,7 +195,7 @@
             and legally, and we hope that others will use them in their work. If
             you do, please include attribution.
         </p>
-        <table class="sources">
+        <table>
             <thead>
                 <tr>
                     <th>item</th>
@@ -474,5 +472,11 @@
                 Gregory Taylor, Andrew Benson, Sam Tarakajian, Manuel Polletti
             </p>
         </div>
+    </div>
+
+    <div class="subsection about-7s">
+        <h2>seven spaces</h2>
+        <p>Seven Spaces is a multimedia album for the web.</p>
+        <p>The audio can be purchased or streamed at Bandcamp.</p>
     </div>
 </section>

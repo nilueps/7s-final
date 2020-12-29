@@ -1,5 +1,5 @@
 <script>
-	import { setContext } from "svelte";
+	import { onMount, setContext } from "svelte";
 
 	import Stack from "./Stack.svelte";
 	import Full from "./Full.svelte";
@@ -211,7 +211,9 @@
 		if (!ticking) requestAnimationFrame(updateStack);
 		ticking = true;
 	};
+
 </script>
+
 
 <style>
 	.dummy {
