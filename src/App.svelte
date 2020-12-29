@@ -1,5 +1,5 @@
 <script>
-	import { onMount, setContext } from "svelte";
+	import { setContext } from "svelte";
 
 	import Stack from "./Stack.svelte";
 	import Full from "./Full.svelte";

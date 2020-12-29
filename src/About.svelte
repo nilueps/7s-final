@@ -76,14 +76,13 @@
 </style>
 
 <section class="about">
-
     <div class="subsection credits">
         <h2>credits</h2>
 
         <table>
             <tr>
                 <th class="credcat">VISUALS</th>
-                <td style="width: 15rem" rowspan="30" />
+                <td style="width: 15rem" rowspan="32" />
                 <th>
                     <a
                         href="https://philipmeyer.cargo.site/"
@@ -170,18 +169,23 @@
             </tr>
             <tr />
             <tr>
-                <th class="credcat">WEBSITE</th>
-                <th>Nico Adama</th>
+                <th class="credcat">WEBSITE DESIGN</th>
+                <th><a href="mailto:ncl.adama@gmail.com">Nico Adama</a></th>
+            </tr>
+            <tr>
+                <td rowspan="3" />
+                <th>Vincent Papineau</th>
             </tr>
             <tr>
                 <td rowspan="2" />
+            </tr>
+            <tr/>
+            <tr>
+                <th class="credcat">CODE</th>
                 <th>
                     <a href="https://nilueps.net" target="_blank">Nicolas
                         Epstein</a>
                 </th>
-            </tr>
-            <tr>
-                <th>Vincent Papineau</th>
             </tr>
         </table>
     </div>
@@ -217,9 +221,9 @@
                         <a
                             href="https://github.com/pdmeyer/berg-intro-visual"
                             target="_blank"><img
-                            class="link"
-                            src="/img/link.svg"
-                            alt="link symbol" /></a>
+                                class="link"
+                                src="/img/link.svg"
+                                alt="link symbol" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -228,9 +232,9 @@
                         <a
                             href="https://github.com/pdmeyer/covd-visual"
                             target="_blank"><img
-                            class="link"
-                            src="/img/link.svg"
-                            alt="link symbol" /></a>
+                                class="link"
+                                src="/img/link.svg"
+                                alt="link symbol" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -245,9 +249,9 @@
                         <a
                             href="https://github.com/pdmeyer/3d-scan-trans"
                             target="_blank"><img
-                            class="link"
-                            src="/img/link.svg"
-                            alt="link symbol" /></a>
+                                class="link"
+                                src="/img/link.svg"
+                                alt="link symbol" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -256,15 +260,16 @@
                         elsewhere
                     </td>
                     <td>
-                        fork razor; ritter, gabo; 802/Red/B; 4435, 10, upper; nd vibra
+                        fork razor; ritter, gabo; 802/Red/B; 4435, 10, upper; nd
+                        vibra
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/bfg-lfo"
                             target="_blank"><img
-                            class="link"
-                            src="/img/link.svg"
-                            alt="link symbol" /></a>
+                                class="link"
+                                src="/img/link.svg"
+                                alt="link symbol" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -283,12 +288,12 @@
                         <a
                             href="https://github.com/pdmeyer/time-series-audio-data"
                             target="_blank"><img
-                            class="link"
-                            src="/img/link.svg"
-                            alt="link symbol" /></a>
+                                class="link"
+                                src="/img/link.svg"
+                                alt="link symbol" /></a>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td>
                         2d video and still image manipulation, mixing, editing,
@@ -442,7 +447,7 @@
                 Sincere thanks to all these people for their support, knowledge,
                 and guidance:
             </p>
-            <br>
+            <br />
             <p>Clara Tissot</p>
             <p>Jason Adams</p>
             <p>Alice Scope</p>
@@ -452,9 +457,8 @@
                 <a href="https://p5js.org/" target="_blank">the P5.js Community</a>
             </p>
             <p>
-                <a
-                    href="https://processingfoundation.org/"
-                    target="_blank">The Processing Foundation</a>
+                <a href="https://processingfoundation.org/" target="_blank">The
+                    Processing Foundation</a>
             </p>
             <p>
                 <a
