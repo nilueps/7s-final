@@ -184,7 +184,7 @@
             </tr>
             <tr>
                 <td rowspan="3" />
-                <th>Vincent Papineau</th>
+                <th><a href="http://vincentpapineau.com" target="_blank">Vincent Papineau</a></th>
             </tr>
             <tr>
                 <td rowspan="2" />
