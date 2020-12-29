@@ -22,7 +22,9 @@
     function styleUpdater() {
         return () => {
             if (fullRef == null) return;
-            let top = scrollY < section.fullTop ? 0 : scrollY - section.fullTop;
+            let top = scrollY - section.fullTop
+            if (top < 0) top = 0;
+            if (top > section.fullH - window.innerHeight) top = section.fullH - window.innerHeight; 
             fullRef.style.top = -top + "px";
             fullRef.style.transition = transition;
         };

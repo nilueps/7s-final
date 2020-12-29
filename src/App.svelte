@@ -156,9 +156,10 @@
 	const sectionThresholds = []; // populated with section 'tops'
 	let runningTop = 0;
 	for (let section of sections) {
+		section.fullH = fullH(section.id)
 		section.fullTop = runningTop;
 		section.stackTop =
-			section.fullTop + fullH(section.id) - window.innerHeight;
+			section.fullTop + fullH(section.id) - window.innerHeight + layerGap;
 		runningTop = section.stackTop;
 		sectionThresholds.push(runningTop);
 		runningTop += stackH(section.id) + window.innerHeight;
@@ -196,7 +197,7 @@
 		scrollY = window.scrollY;
 		if (!dummyH) return;
 		// compute visible components
-		const tOffset = 0//layerGap; // to swap out the placeholder before reaching the layers
+		const tOffset = 0; // to swap out the placeholder before reaching the layers
 		const isPastThreshold = (threshold) => scrollY <= threshold;
 		let idx = sectionThresholds.findIndex((t) =>
 			isPastThreshold(t - tOffset)

@@ -204,21 +204,35 @@
                     <th>comment</th>
                     <th>used in</th>
                     <th>environment/format</th>
-                    <th>link</th>
+                    <th>source</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>p5.js source code and image material</td>
-                    <td rowspan="3" />
+                    <td rowspan="2">p5.js source code and image material</td>
+                    <td rowspan="4" />
                     <td>206/754</td>
-                    <td>
+                    <td rowspan="2">
                         <a href="https://p5js.org/" target="_blank">p5.js</a>
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/berg-intro-visual"
-                            target="_blank">https://github.com/pdmeyer/berg-intro-visual</a>
+                            target="_blank"><img
+                            class="link"
+                            src="/img/link.svg"
+                            alt="link symbol" /></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4435, 10, upper</td>
+                    <td>
+                        <a
+                            href="https://github.com/pdmeyer/covd-visual"
+                            target="_blank"><img
+                            class="link"
+                            src="/img/link.svg"
+                            alt="link symbol" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -226,13 +240,16 @@
                     <td>
                         nd vibra; fork razor; ritter, gabo; 802/Red/B; memory
                     </td>
-                    <td rowspan="3">
+                    <td rowspan="4">
                         <a href="https://cycling74.com/" target="_blank">Max</a>
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/3d-scan-trans"
-                            target="_blank">https://github.com/pdmeyer/3d-scan-trans</a>
+                            target="_blank"><img
+                            class="link"
+                            src="/img/link.svg"
+                            alt="link symbol" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -241,13 +258,15 @@
                         elsewhere
                     </td>
                     <td>
-                        data source used for modulation in 3d model animator and
-                        elsewhere
+                        fork razor; ritter, gabo; 802/Red/B; 4435, 10, upper; nd vibra
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/bfg-lfo"
-                            target="_blank">https://github.com/pdmeyer/bfg-lfo</a>
+                            target="_blank"><img
+                            class="link"
+                            src="/img/link.svg"
+                            alt="link symbol" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -265,31 +284,20 @@
                     <td>
                         <a
                             href="https://github.com/pdmeyer/time-series-audio-data"
-                            target="_blank">https://github.com/pdmeyer/time-series-audio-data</a>
+                            target="_blank"><img
+                            class="link"
+                            src="/img/link.svg"
+                            alt="link symbol" /></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>p5.js source code and image material</td>
-                    <td rowspan="3" />
-                    <td>4435, 10, upper</td>
-                    <td>
-                        <a href="https://p5js.org/" target="_blank">p5.js</a>
-                    </td>
-                    <td>
-                        <a
-                            href="https://github.com/pdmeyer/covd-visual"
-                            target="_blank">https://github.com/pdmeyer/covd-visual</a>
-                    </td>
-                </tr>
+                
                 <tr>
                     <td>
                         2d video and still image manipulation, mixing, editing,
                         and arrangement patches for max
                     </td>
+                    <td rowspan="2" />
                     <td>fork razor; ritter, gabo; 802/Red/B</td>
-                    <td>
-                        <a href="https://cycling74.com/" target="_blank">Max</a>
-                    </td>
                     <td rowspan="2" />
                 </tr>
                 <tr>
