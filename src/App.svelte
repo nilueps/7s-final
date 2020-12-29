@@ -33,7 +33,7 @@
 			title: "berg intro",
 			folder: "bergintro",
 			variation: "triple",
-			layerCount: 7,
+			layerCount: 3,
 			fullScale: 4.0,
 			content: Page1,
 		},
@@ -42,7 +42,7 @@
 			title: "nd vibra",
 			folder: "ndvibra",
 			variation: "full",
-			layerCount: 7,
+			layerCount: 3,
 			fullScale: 4.0,
 			content: Page2,
 		},
@@ -51,7 +51,7 @@
 			title: "802/Red/B",
 			folder: "red",
 			variation: "full",
-			layerCount: 7,
+			layerCount: 3,
 			fullScale: 4.0,
 			content: Page3,
 		},
@@ -60,7 +60,7 @@
 			title: "fork razor",
 			folder: "forkrazor",
 			variation: "full",
-			layerCount: 8,
+			layerCount: 3,
 			fullScale: 4.0,
 			content: Page4,
 		},
@@ -69,7 +69,7 @@
 			title: "4435, 10, upper",
 			folder: "covid",
 			variation: "full",
-			layerCount: 7,
+			layerCount: 3,
 			fullScale: 4.0,
 			content: Page5,
 		},
@@ -78,7 +78,7 @@
 			title: "ritter, gabo",
 			folder: "ritter",
 			variation: "full",
-			layerCount: 7,
+			layerCount: 3,
 			fullScale: 4.0,
 			content: Page6,
 		},
@@ -87,7 +87,7 @@
 			title: "memory",
 			folder: "memory",
 			variation: "full",
-			layerCount: 7,
+			layerCount: 3,
 			fullScale: 4.0,
 			content: Page7,
 		},
@@ -97,8 +97,9 @@
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			fullScale: 2.0,
-			component: About,
+			fullScale: 3.0,
+			noShowcase: true,
+			content: About,
 		},
 	];
 
@@ -121,7 +122,7 @@
 			if (section.id === 0 || section.id === sections.length - 1)
 				continue;
 
-			const path = `img/${section.id}_${section.folder}/`;
+			const path = `img/layers/`;
 			const fullPath = path + `${section.id}_full.jpg`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
@@ -200,8 +201,8 @@
 		let idx = sectionThresholds.findIndex((t) =>
 			isPastThreshold(t - tOffset)
 		);
-		if (idx < 1) idx = 1;
-		if (idx < 0) idx = sections.length - 1;
+		if (idx === -1) idx = sections.length - 1;
+		else if (idx < 1) idx = 1;
 		updateVisibleSections([idx - 1, idx]);
 	}
 
@@ -241,8 +242,6 @@
 
 <svelte:head>
 	<style>
-		@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
-
 		:root {
 			--mainbgcolor: #726665;
 		}
@@ -257,8 +256,14 @@
 
 		html,
 		body {
+			text-align: center;
 			font-size: 100%;
+			color: white;
 			background: var(--mainbgcolor);
+		}
+
+		iframe {
+			border: none;
 		}
 	</style>
 </svelte:head>
@@ -280,18 +285,18 @@
 			{/if}
 		</div>
 		<div class="bottom">
-			{#if sections[bottomSectionIdx].component != null}
+			<!-- {#if sections[bottomSectionIdx].component != null}
 				<svelte:component this={sections[bottomSectionIdx].component} />
-			{:else}
+			{:else} -->
+			{#if sections[bottomSectionIdx].layerCount > 0}
 				<Stack
 					section={sections[bottomSectionIdx]}
 					{scrollY}
 					{newSection} />
-				<Full
-					section={sections[bottomSectionIdx]}
-					{scrollY}
-					{newSection} />
 			{/if}
+
+			<Full section={sections[bottomSectionIdx]} {scrollY} {newSection} />
+			<!-- {/if} -->
 		</div>
 	</div>
 {/await}
