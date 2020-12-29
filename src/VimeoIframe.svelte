@@ -9,6 +9,5 @@
 <iframe
   {title}
   {src}
-  frameborder="0"
-  allow="autoplay; fullscreen"
+  allow="fullscreen"
   allowfullscreen />

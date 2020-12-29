@@ -7,6 +7,7 @@
         text-align: left;
         font-size: 1rem;
         margin-bottom: 1rem;
+        margin-left: 5rem;
     }
 </style>
 
