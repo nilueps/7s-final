@@ -143,7 +143,7 @@
 	// global 	context vars
 	//
 	const layerGap = 300;
-	const easing = "top ease 200ms";// cubic-bezier(.55,.06,.68,.19) 0s";
+	const easing = "top ease 200ms"; // cubic-bezier(.55,.06,.68,.19) 0s";
 	setContext("stackVars", { layerGap, easing });
 
 	//
@@ -156,7 +156,7 @@
 	const sectionThresholds = []; // populated with section 'tops'
 	let runningTop = 0;
 	for (let section of sections) {
-		section.fullH = fullH(section.id)
+		section.fullH = fullH(section.id);
 		section.fullTop = runningTop;
 		section.stackTop =
 			section.fullTop + fullH(section.id) - window.innerHeight + layerGap;
@@ -211,9 +211,7 @@
 		if (!ticking) requestAnimationFrame(updateStack);
 		ticking = true;
 	};
-
 </script>
-
 
 <style>
 	.dummy {
@@ -267,6 +265,14 @@
 
 		iframe {
 			border: none;
+			border-radius: 0.2rem;
+			width: 100%;
+			height: 100%;
+		}
+
+		#pagetop {
+			position: absolute;
+			top: 0;
 		}
 	</style>
 </svelte:head>
@@ -274,8 +280,9 @@
 {#await preloadAll()}
 	<Loading />
 {:then _}
-	<div class="dummy" style="height: {dummyH}px">
-		<div class="top">
+<div class="dummy" style="height: {dummyH}px">
+	<div id="pagetop" />
+	<div class="top">
 			{#if sections[topSectionIdx].component != null}
 				<svelte:component
 					this={sections[topSectionIdx].component}

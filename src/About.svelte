@@ -73,9 +73,19 @@
         height: 1rem;
         width: auto;
     }
+    .btt {
+        font-size: 1rem;
+        position: fixed;
+        top: 1rem;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
 </style>
 
 <section class="about">
+    <div class="btt">
+        <a href="#pagetop"><img height="32px" width="auto" src="img/chevron_up.svg" alt="top" /></a>
+    </div>
     <div class="subsection credits">
         <h2>credits</h2>
 

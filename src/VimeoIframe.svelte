@@ -4,11 +4,6 @@
 </script>
 
 <style>
-  iframe {
-    border: 0;
-    height: 100%;
-    width: 100%;
-  }
 </style>
 
 <iframe
