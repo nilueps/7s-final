@@ -1,14 +1,12 @@
 <style>
     .about {
-        height: 100%;
         text-align: center;
         padding: 10vh 10vw;
         padding-top: 50vh;
-        background: linear-gradient(#666 0%, #111 8%,#080808 9%, black 10%);
+        background: linear-gradient(#666 0%, #111 8%, #080808 9%, black 10%);
     }
 
     .subsection {
-        min-height: 1080px;
         margin: 20rem auto;
     }
 
@@ -35,7 +33,6 @@
     a:visited {
         color: #48b68d;
     }
-
 
     table {
         font-size: 1rem;
@@ -92,7 +89,11 @@
 
 <section class="about">
     <div class="btt">
-        <a href="#pagetop"><img height="32px" width="auto" src="img/chevron_up.svg" alt="top" /><br><span>back to top</span></a>
+        <a href="#pagetop"><img
+                height="32px"
+                width="auto"
+                src="img/chevron_up.svg"
+                alt="top" /><br /><span>back to top</span></a>
     </div>
     <div class="subsection credits">
         <h2>credits</h2>
@@ -187,24 +188,24 @@
             </tr>
             <tr />
             <tr>
-                <th class="credcat">WEBSITE DESIGN</th>
-                <th><a href="mailto:ncl.adama@gmail.com">Nico Adama</a></th>
+                <th class="credcat">WEBSITE</th>
+                <th><a href="mailto:ncl.adama@gmail.com">Nico Adama, design</a></th>
             </tr>
             <tr>
                 <td rowspan="3" />
-                <th><a href="http://vincentpapineau.com" target="_blank">Vincent Papineau</a></th>
-            </tr>
-            <tr>
-                <td rowspan="2" />
-            </tr>
-            <tr/>
-            <tr>
-                <th class="credcat">CODE</th>
                 <th>
-                    <a href="https://nilueps.net" target="_blank">Nicolas
-                        Epstein</a>
+                    <a href="http://vincentpapineau.com" target="_blank">Vincent
+                        Papineau, design</a>
                 </th>
             </tr>
+            <tr>
+                <th>
+                    <a href="https://nilueps.net" target="_blank">Nicolas
+                        Epstein, code</a>
+                </th>
+                <td rowspan="2" />
+            </tr>
+            <tr />
         </table>
     </div>
 

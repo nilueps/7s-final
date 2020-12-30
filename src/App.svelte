@@ -97,7 +97,7 @@
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			fullScale: 5.0,
+			fullScale: 5,
 			noShowcase: true,
 			content: About,
 		},
@@ -220,6 +220,7 @@
 		left: 0;
 		width: 100%;
 		background: transparent;
+		overflow: scroll;
 	}
 
 	.top,
