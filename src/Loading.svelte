@@ -29,36 +29,28 @@
 
     @keyframes pulse {
         0% {
-            transform: rotate(2deg);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(2deg);
         }
         5% {
-            transform: rotate(-2deg);
-            transform: translate(-50%, -50%);
+            transform:  translate(-50%, -50%) rotate(-2deg);
         }
         10% {
-            transform: rotate(2deg);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(2deg);
         }
         15% {
-            transform: rotate(-2deg);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(-2deg);
         }
         20% {
-            transform: rotate(2deg);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(2deg);
         }
         25% {
-            transform: rotate(-2deg);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(-2deg);
         }
         30% {
-            transform: rotate(0deg);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(0deg);
         }
         100% {
-            transform: rotate(0deg);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(0deg);
         }
     }
 </style>
