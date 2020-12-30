@@ -30,27 +30,35 @@
     @keyframes pulse {
         0% {
             transform: rotate(2deg);
+            transform: translate(-50%, -50%);
         }
         5% {
             transform: rotate(-2deg);
+            transform: translate(-50%, -50%);
         }
         10% {
             transform: rotate(2deg);
+            transform: translate(-50%, -50%);
         }
         15% {
             transform: rotate(-2deg);
+            transform: translate(-50%, -50%);
         }
         20% {
             transform: rotate(2deg);
+            transform: translate(-50%, -50%);
         }
         25% {
             transform: rotate(-2deg);
+            transform: translate(-50%, -50%);
         }
         30% {
             transform: rotate(0deg);
+            transform: translate(-50%, -50%);
         }
         100% {
             transform: rotate(0deg);
+            transform: translate(-50%, -50%);
         }
     }
 </style>
