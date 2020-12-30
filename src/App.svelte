@@ -220,7 +220,6 @@
 		left: 0;
 		width: 100%;
 		background: transparent;
-		overflow: scroll;
 	}
 
 	.top,

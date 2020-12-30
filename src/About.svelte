@@ -1,13 +1,18 @@
 <style>
     .about {
+        height: 500vh;
         text-align: center;
-        padding: 10vh 10vw;
-        padding-top: 50vh;
-        background: linear-gradient(#666 0%, #111 8%, #080808 9%, black 10%);
+        padding: 0 10vw;
+        padding-top: 100vh;
+        background: linear-gradient(#666 0%, black 20%);
     }
 
     .subsection {
-        margin: 20rem auto;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .about-7s {
@@ -16,12 +21,12 @@
 
     h2 {
         text-align: center;
-        font-size: 2rem;
-        margin-bottom: 3rem;
+        font-size: 1.5vw;
+        margin-bottom: 2vw;
     }
     p {
-        font-size: 1rem;
-        margin-bottom: 1rem;
+        font-size: 0.75vw;
+        margin-bottom: 0.7vw;
     }
     a {
         color: #55ffc4;
@@ -35,11 +40,10 @@
     }
 
     table {
-        font-size: 1rem;
+        font-size: 0.75vw;
     }
     tr {
-        height: 2rem;
-        min-height: 2rem;
+        height: 1vw;
     }
     .credits table {
         margin: 0 auto;
@@ -55,35 +59,45 @@
         text-align: right;
     }
     .materials table {
-        margin: 0 10vw;
-        margin-top: 5rem;
+        margin-top: 0;
     }
+
     .materials thead {
-        font-size: 1.5rem;
+        font-size: 1vw;
         text-align: center;
         background-color: rgb(29, 29, 29);
     }
     .materials th {
-        padding: 0.5rem 1rem;
+        padding: 0.1vw 0.2vw;
     }
     .materials td {
-        padding: 0.5rem 0.5rem;
+        padding: 0.2vw 0.3vw;
         text-align: center;
         background-color: rgb(14, 14, 14);
     }
     .link {
-        height: 1rem;
+        height: 0.7vw;
         width: auto;
     }
     .btt {
-        font-size: 1rem;
+        font-size: 0.7vw;
         position: fixed;
-        top: 1rem;
-        right: 1rem;
+        top: 0.7vw;
+        right: 0.7vw;
         transform: translate(-50%, 0);
     }
     .btt > a:hover {
         text-decoration: none;
+    }
+
+    @media screen and (max-height: 800px) {
+        .about {
+            padding: 5vh 5vw;
+            padding-top: 100vh;
+        }
+        .materials table {
+            margin: 0;
+        }
     }
 </style>
 
@@ -101,7 +115,7 @@
         <table>
             <tr>
                 <th class="credcat">VISUALS</th>
-                <td style="width: 15rem" rowspan="32" />
+                <td style="width: 15vw" rowspan="32" />
                 <th>
                     <a
                         href="https://philipmeyer.cargo.site/"
