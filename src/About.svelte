@@ -1,12 +1,13 @@
 <style>
     .about {
-        height: 400vh;
+        height: 500vh;
         text-align: center;
         padding: 10vh 10vw;
         background: black;
     }
 
     .subsection {
+        min-height: 1080px;
         margin: 20rem auto;
     }
 
@@ -23,7 +24,21 @@
         font-size: 1rem;
         margin-bottom: 1rem;
     }
+    a {
+        color: #55ffc4;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    a:visited {
+        color: #48b68d;
+    }
 
+
+    table {
+        font-size: 1rem;
+    }
     tr {
         height: 2rem;
         min-height: 2rem;
@@ -40,17 +55,6 @@
     .credcat {
         font-style: bold;
         text-align: right;
-    }
-
-    table {
-        font-size: 1rem;
-    }
-    a {
-        color: #55ffc4;
-        text-decoration: none;
-    }
-    a:visited {
-        color: #48b68d;
     }
     .materials table {
         margin: 0 10vw;

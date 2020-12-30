@@ -97,7 +97,7 @@
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			fullScale: 4.0,
+			fullScale: 5.0,
 			noShowcase: true,
 			content: About,
 		},
@@ -239,17 +239,21 @@
 	.bottom {
 		z-index: 1;
 	}
+	#pagetop {
+		position: absolute;
+		top: 0;
+	}
 </style>
 
 <svelte:head>
 	<style>
 		:root {
-			--mainbgcolor: #726665;
+			--mainbgcolor: #666666;
 		}
 
 		* {
 			box-sizing: border-box;
-			font-family: 'Spectral', serif;
+			font-family: "Spectral", serif;
 			line-height: 1.2;
 			margin: 0;
 			padding: 0;
@@ -269,20 +273,15 @@
 			width: 100%;
 			height: 100%;
 		}
-
-		#pagetop {
-			position: absolute;
-			top: 0;
-		}
 	</style>
 </svelte:head>
 <svelte:window on:scroll={handleScroll} />
 {#await preloadAll()}
 	<Loading />
 {:then _}
-<div class="dummy" style="height: {dummyH}px">
-	<div id="pagetop" />
-	<div class="top">
+	<div class="dummy" style="height: {dummyH}px">
+		<div id="pagetop" />
+		<div class="top">
 			{#if sections[topSectionIdx].component != null}
 				<svelte:component
 					this={sections[topSectionIdx].component}
