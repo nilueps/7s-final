@@ -1,6 +1,6 @@
 <style>
     .about {
-        height: 500vh;
+        height: 100%;
         text-align: center;
         padding: 10vh 10vw;
         padding-top: 50vh;

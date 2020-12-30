@@ -1,5 +1,5 @@
 <script>
-import { onMount } from "svelte";
+    import { onMount } from "svelte";
 
     import { fade } from "svelte/transition";
 
@@ -49,7 +49,14 @@ import { onMount } from "svelte";
         }
         setTimeout(() => doJitter(), 750);
     }
-    onMount(() => setTimeout(() => showChevron = true, 2000))
+    let showScroll = false;
+    function handleClick() {
+        console.log("clicked")
+        showScroll = true;
+        setTimeout(() => (showScroll = false), 1000);
+    }
+
+    onMount(() => setTimeout(() => (showChevron = true), 2000));
 </script>
 
 <style>
@@ -81,13 +88,26 @@ import { onMount } from "svelte";
         left: 50%;
         bottom: 0;
         transform: translate(-50%, 0);
+        font-size: 1.5rem;
+        pointer-events: auto;
     }
 </style>
 
 {#if visible}
-    <div transition:fade class="landing"><span class="title">{text}</span>
+    <div transition:fade class="landing">
+        <span class="title">{text}</span>
         {#if showChevron}
-        <img transition:fade width="70px" height="auto" class="chevron-icon" src="/img/chevron_down.svg" alt="down arrow" />
+            <div class="chevron-icon" on:click="{handleClick}">
+                {#if showScroll}
+                    <span transition:fade>scroll</span><br />
+                {/if}
+                <img
+                    transition:fade
+                    width="70px"
+                    height="auto"
+                    src="/img/chevron_down.svg"
+                    alt="down arrow" />
+            </div>
         {/if}
     </div>
 {/if}
