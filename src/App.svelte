@@ -294,9 +294,6 @@
 			{/if}
 		</div>
 		<div class="bottom">
-			<!-- {#if sections[bottomSectionIdx].component != null}
-				<svelte:component this={sections[bottomSectionIdx].component} />
-			{:else} -->
 			{#if sections[bottomSectionIdx].layerCount > 0}
 				<Stack
 					section={sections[bottomSectionIdx]}
@@ -305,7 +302,6 @@
 			{/if}
 
 			<Full section={sections[bottomSectionIdx]} {scrollY} {newSection} />
-			<!-- {/if} -->
 		</div>
 	</div>
 {/await}

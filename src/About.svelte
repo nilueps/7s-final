@@ -144,7 +144,7 @@
                 <th>
                     <a
                         href="https://philipmeyer.cargo.site/"
-                        target="_blank">Philip Meyer</a>
+                        rel="noopener" target="_blank">Philip Meyer</a>
                 </th>
             </tr>
             <tr>
@@ -171,7 +171,7 @@
                 <th>
                     <a
                         href="https://vimeo.com/user17028823"
-                        target="_blank">Ariel Fisher</a>
+                        rel="noopener" target="_blank">Ariel Fisher</a>
                 </th>
             </tr>
             <tr>
@@ -183,7 +183,7 @@
             <tr />
             <tr>
                 <th>
-                    <a href="https://cprinz.co/" target="_blank">Sarah Prinz</a>
+                    <a href="https://cprinz.co/" rel="noopener" target="_blank">Sarah Prinz</a>
                 </th>
             </tr>
             <tr>
@@ -235,13 +235,13 @@
             <tr>
                 <td rowspan="3" />
                 <th>
-                    <a href="http://vincentpapineau.com" target="_blank">Vincent
+                    <a href="http://vincentpapineau.com" rel="noopener" target="_blank">Vincent
                         Papineau, design</a>
                 </th>
             </tr>
             <tr>
                 <th>
-                    <a href="https://nilueps.net" target="_blank">Nicolas
+                    <a href="https://nilueps.net" rel="noopener" target="_blank">Nicolas
                         Epstein, code</a>
                 </th>
                 <td rowspan="2" />
@@ -275,12 +275,12 @@
                     <td rowspan="4" />
                     <td>206/754</td>
                     <td rowspan="2">
-                        <a href="https://p5js.org/" target="_blank">p5.js</a>
+                        <a href="https://p5js.org/" rel="noopener" target="_blank">p5.js</a>
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/berg-intro-visual"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -291,7 +291,7 @@
                     <td>
                         <a
                             href="https://github.com/pdmeyer/covd-visual"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -303,12 +303,12 @@
                         nd vibra; fork razor; ritter, gabo; 802/Red/B; memory
                     </td>
                     <td rowspan="4">
-                        <a href="https://cycling74.com/" target="_blank">Max</a>
+                        <a href="https://cycling74.com/" rel="noopener" target="_blank">Max</a>
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/3d-scan-trans"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -326,7 +326,7 @@
                     <td>
                         <a
                             href="https://github.com/pdmeyer/bfg-lfo"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -347,7 +347,7 @@
                     <td>
                         <a
                             href="https://github.com/pdmeyer/time-series-audio-data"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -376,7 +376,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/hyqded6sb082pwl/AABKtiTZpJUN79fq1Rtn-XGia?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -387,7 +387,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/099mk2ppb6dquhi/AABd9F3pnFVOLFmJkXz4GEIaa?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -398,7 +398,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/vc4bfcase6hjw0t/AABs5tcDrhbE_qx2b8zIAzGJa?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -409,7 +409,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/8app8fjplmvl6zp/AAC832CHujhX-iJ_guKrx2DYa?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -420,7 +420,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/13f91hpjn4pnqmc/AAChZyoqPrD4kL6-PyKmW9W2a?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -431,7 +431,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/j9px1olweuyxtop/AADmHLXityuW5QhSDO84lAPKa?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -442,7 +442,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/n6bdk1vkjakks16/AAB1Vjj5cRs8KhHI4gwlnvQLa?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -456,7 +456,7 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/nz6umskhhyxcrqj/AADR3VAZRhebC-vm9xlirC5qa?dl=0"
-                            target="_blank"><img
+                            rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -514,20 +514,20 @@
             <p>Ariel Fisher</p>
             <p>Lee Kawasaki</p>
             <p>
-                <a href="https://p5js.org/" target="_blank">the P5.js Community</a>
+                <a href="https://p5js.org/" rel="noopener" target="_blank">the P5.js Community</a>
             </p>
             <p>
-                <a href="https://processingfoundation.org/" target="_blank">The
+                <a href="https://processingfoundation.org/" rel="noopener" target="_blank">The
                     Processing Foundation</a>
             </p>
             <p>
                 <a
                     href="https://www.google.com/search?q=amazing+max+stuff&oq=amazing+max+stuff&aqs=chrome..69i57.1746j0j7&sourceid=chrome&ie=UTF-8"
-                    target="_blank">Federico Foderaro / Amazing Max Stuff</a>:
+                    rel="noopener" target="_blank">Federico Foderaro / Amazing Max Stuff</a>:
                 training, inspiration, and support on Jitter and OpenGL in Max
             </p>
             <p>
-                <a href="https://thecodingtrain.com/" target="_blank">Daniel
+                <a href="https://thecodingtrain.com/" rel="noopener" target="_blank">Daniel
                     Schiffman / The Coding Train:</a>: training and inspiration
                 in Processing and P5, conceptual contributions
             </p>
