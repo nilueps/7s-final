@@ -25,7 +25,7 @@
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			fullScale: 0.5,
+			fullScale: 0,
 			component: Landing,
 		},
 		{
