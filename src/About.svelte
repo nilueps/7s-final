@@ -1,3 +1,26 @@
+<script>
+    import {  onDestroy, onMount } from "svelte";
+
+    import { fade } from "svelte/transition";
+
+    let showBtt = false;
+
+    function checkBtt() {
+        showBtt =
+            window.scrollY >
+            document.getElementById("dummy").clientHeight -
+                window.innerHeight * 4;
+    }
+    let timer;
+    onMount(() => {
+        timer = setInterval(checkBtt, 250);
+    });
+
+    onDestroy(() => {
+        clearInterval(timer);
+    });
+</script>
+
 <style>
     .about {
         height: 500vh;
@@ -102,13 +125,15 @@
 </style>
 
 <section class="about">
-    <div class="btt">
-        <a href="#pagetop"><img
-                height="32px"
-                width="auto"
-                src="img/chevron_up.svg"
-                alt="top" /><br /><span>back to top</span></a>
-    </div>
+    {#if showBtt}
+        <div class="btt" transition:fade>
+            <a href="#pagetop"><img
+                    height="32px"
+                    width="auto"
+                    src="img/chevron_up.svg"
+                    alt="top" /><br /><span>back to top</span></a>
+        </div>
+    {/if}
     <div class="subsection credits">
         <h2>credits</h2>
 
@@ -203,7 +228,9 @@
             <tr />
             <tr>
                 <th class="credcat">WEBSITE</th>
-                <th><a href="mailto:ncl.adama@gmail.com">Nico Adama, design</a></th>
+                <th>
+                    <a href="mailto:ncl.adama@gmail.com">Nico Adama, design</a>
+                </th>
             </tr>
             <tr>
                 <td rowspan="3" />

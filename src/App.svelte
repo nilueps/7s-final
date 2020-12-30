@@ -279,7 +279,7 @@
 {#await preloadAll()}
 	<Loading />
 {:then _}
-	<div class="dummy" style="height: {dummyH}px">
+	<div id="dummy" class="dummy" style="height: {dummyH}px">
 		<div id="pagetop" />
 		<div class="top">
 			{#if sections[topSectionIdx].component != null}
