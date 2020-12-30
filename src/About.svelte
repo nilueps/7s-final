@@ -3,7 +3,8 @@
         height: 500vh;
         text-align: center;
         padding: 10vh 10vw;
-        background: black;
+        padding-top: 50vh;
+        background: linear-gradient(#666 0%, #111 8%,#080808 9%, black 10%);
     }
 
     .subsection {
@@ -81,14 +82,17 @@
         font-size: 1rem;
         position: fixed;
         top: 1rem;
-        left: 50%;
+        right: 1rem;
         transform: translate(-50%, 0);
+    }
+    .btt > a:hover {
+        text-decoration: none;
     }
 </style>
 
 <section class="about">
     <div class="btt">
-        <a href="#pagetop"><img height="32px" width="auto" src="img/chevron_up.svg" alt="top" /></a>
+        <a href="#pagetop"><img height="32px" width="auto" src="img/chevron_up.svg" alt="top" /><br><span>back to top</span></a>
     </div>
     <div class="subsection credits">
         <h2>credits</h2>
