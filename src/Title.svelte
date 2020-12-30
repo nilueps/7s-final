@@ -9,6 +9,7 @@
     .sticker {
         height: 100vh;
         padding-bottom: 5rem;
+        flex: 1;
     }
     h2 {
         position: -webkit-sticky;

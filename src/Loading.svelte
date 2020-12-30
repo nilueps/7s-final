@@ -13,7 +13,7 @@
         overflow: hidden;
         color: white;
         user-select: none;
-        font-size: 1.25rem;
+        font-size: 2rem;
         font-weight: normal;
         background: transparent;
     }
