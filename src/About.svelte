@@ -105,7 +105,7 @@
     .btt {
         font-size: 0.7vw;
         position: fixed;
-        top: 0.7vw;
+        bottom: 0.7vw;
         right: 0.7vw;
         transform: translate(-50%, 0);
     }
@@ -131,7 +131,7 @@
                     height="32px"
                     width="auto"
                     src="img/chevron_up.svg"
-                    alt="top" /><br /><span>back to top</span></a>
+                    alt="top" /><br /><span>top</span></a>
         </div>
     {/if}
     <div class="subsection credits">
