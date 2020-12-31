@@ -118,7 +118,7 @@
 
 	function preloadAll() {
 		const promises = [];
-		for (let section of sections) {
+		for (let [idx, section] of sections.entries()) {
 			// skip first (landing) and last (about)
 			if (section.id === 0 || section.id === sections.length - 1)
 				continue;
@@ -127,14 +127,14 @@
 			const fullPath = path + `${section.id}_long.jpg`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
-			promises.push(preloadImg(fullPath, setFullProp));
+			if (idx < 3) promises.push(preloadImg(fullPath, setFullProp));
 
 			section.layers = [];
 			for (let j = 1; j < section.layerCount + 1; j++) {
 				const layerPath = path + `${section.id}_${j}.png`;
 				const setLayerProp = (img) =>
 					(section.layers = [...section.layers, img]);
-				promises.push(preloadImg(layerPath, setLayerProp));
+				if (idx < 3) promises.push(preloadImg(layerPath, setLayerProp));
 			}
 		}
 		return Promise.all(promises);
