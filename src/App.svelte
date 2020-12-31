@@ -117,7 +117,7 @@
 	}
 
 	function preloadAll() {
-		const promises = [];
+		const firstTwo = [];
 		for (let [idx, section] of sections.entries()) {
 			// skip first (landing) and last (about)
 			if (section.id === 0 || section.id === sections.length - 1)
@@ -127,17 +127,19 @@
 			const fullPath = path + `${section.id}_long.jpg`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
-			if (idx < 3) promises.push(preloadImg(fullPath, setFullProp));
-
+			const promise = preloadImg(fullPath, setFullProp)
+			if (idx < 3) firstTwo.push(promise);
+			
 			section.layers = [];
 			for (let j = 1; j < section.layerCount + 1; j++) {
 				const layerPath = path + `${section.id}_${j}.png`;
 				const setLayerProp = (img) =>
 					(section.layers = [...section.layers, img]);
-				if (idx < 3) promises.push(preloadImg(layerPath, setLayerProp));
+				const promise = preloadImg(layerPath, setLayerProp)
+				if (idx < 3) firstTwo.push(promise);
 			}
 		}
-		return Promise.all(promises);
+		return Promise.all(firstTwo);
 	}
 
 	//
@@ -223,12 +225,12 @@
 		width: 100%;
 		background: transparent;
 	}
-
+/* 
 	.snap-anchor {
 		position: absolute;
 		height: 100vh;
 		scroll-snap-align: start end;
-	}
+	} */
 
 	.top,
 	.bottom {
@@ -289,11 +291,11 @@
 	<Loading />
 {:then _}
 	<div transition:fade id="dummy" class="dummy" style="height: {dummyH}px">
-		{#each sections as section, index}
+		<!-- {#each sections as section, index}
 			{#if index > 0 && index < sections.length - 1}
 				<div class="snap-anchor" style="top: {section.fullTop + window.innerHeight * 2}px;" />
 			{/if}
-		{/each}
+		{/each} -->
 		<div id="pagetop" />
 		<div class="top">
 			{#if sections[topSectionIdx].component != null}
