@@ -81,8 +81,13 @@
         font-style: bold;
         text-align: right;
     }
+
+    div.subsection.materials > p {
+        margin: 0.75vw 20vw;
+    }
+
     .materials table {
-        margin-top: 0;
+        margin-top: 1vw;
     }
 
     .materials thead {
