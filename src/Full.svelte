@@ -16,7 +16,7 @@
         scrollY >= contentThreshold &&
         scrollY < contentThreshold + window.innerHeight * 2;
     $: showTitle =
-        scrollY >= contentThreshold && scrollY < contentThreshold + window.innerHeight * 0.4;
+        scrollY >= contentThreshold && scrollY < contentThreshold + window.innerHeight * 0.8;
     let fullRef;
     let fullH;
 
