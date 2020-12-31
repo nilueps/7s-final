@@ -124,7 +124,7 @@
 				continue;
 
 			const path = `img/layers/`;
-			const fullPath = path + `${section.id}_full.jpg`;
+			const fullPath = path + `${section.id}_long.jpg`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
 			promises.push(preloadImg(fullPath, setFullProp));
