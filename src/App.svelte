@@ -162,7 +162,7 @@
 			section.fullTop + fullH(section.id) - window.innerHeight + layerGap;
 		runningTop = section.stackTop;
 		sectionThresholds.push(runningTop);
-		runningTop += stackH(section.id) + window.innerHeight;
+		runningTop += stackH(section.id) + layerGap;//window.innerHeight;
 	}
 	// calculate document height needed for dummy
 	const dummyH = runningTop; // sections.reduce((h, s, i) => h + s.sectionH, 0);
