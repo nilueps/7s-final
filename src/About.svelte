@@ -23,15 +23,16 @@
 
 <style>
     .about {
-        height: 500vh;
+        height: 400vh;
         text-align: center;
-        padding: 0 10vw;
+        padding: 10vh 10vw;
         padding-top: 100vh;
-        background: linear-gradient(#666 0%, black 20%);
+        background: linear-gradient(#666 0%, black 25%);
     }
 
     .subsection {
-        height: 100vh;
+        /* height: 90vh; */
+        margin: 15vh 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -40,6 +41,11 @@
 
     .about-7s {
         margin: 0 20vh;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+        margin-bottom: 5rem;
     }
 
     h2 {
@@ -64,6 +70,7 @@
 
     table {
         font-size: 0.75vw;
+
     }
     tr {
         height: 1vw;
@@ -84,23 +91,26 @@
 
     div.subsection.materials > p {
         margin: 0.75vw 20vw;
+        text-align: left;
     }
 
     .materials table {
         margin-top: 1vw;
+        width: 70vw;
+        text-align: left;
     }
 
     .materials thead {
         font-size: 1vw;
-        text-align: center;
+        /* text-align: center; */
         background-color: rgb(29, 29, 29);
     }
     .materials th {
-        padding: 0.1vw 0.2vw;
+        padding: 0.8vw 1vw;
     }
     .materials td {
-        padding: 0.2vw 0.3vw;
-        text-align: center;
+        padding: 0.8vw 1vw;
+        /* text-align: center; */
         background-color: rgb(14, 14, 14);
     }
     .link {
@@ -139,6 +149,11 @@
                     alt="top" /><br /><span>top</span></a>
         </div>
     {/if}
+    <div class="subsection about-7s">
+        <h1>about seven spaces</h1>
+        <p>Seven Spaces is a multimedia album for the web.</p>
+        <p>The audio can be purchased or streamed at Bandcamp.</p>
+    </div>
     <div class="subsection credits">
         <h2>credits</h2>
 
@@ -268,7 +283,7 @@
             <thead>
                 <tr>
                     <th>item</th>
-                    <th>comment</th>
+                    <th style="width: 20vw;">comment</th>
                     <th>used in</th>
                     <th>environment/format</th>
                     <th>source</th>
@@ -364,95 +379,25 @@
                         2d video and still image manipulation, mixing, editing,
                         and arrangement patches for max
                     </td>
-                    <td rowspan="2" />
+                    <td />
                     <td>fork razor; ritter, gabo; 802/Red/B</td>
-                    <td rowspan="2" />
+                    <td />
                 </tr>
                 <tr>
-                    <td>texture generator</td>
-                    <td>802/Red/B</td>
-                    <td>Processing</td>
-                </tr>
-                <tr>
-                    <td rowspan="7">audio files</td>
-                    <td rowspan="7">stems</td>
-                    <td>206/754</td>
-                    <td rowspan="7">WAV file</td>
+                    <td >audio files</td>
+                    <td >stems</td>
+                    <td >all</td>
+                    <td >WAV file</td>
                     <td>
                         <a
-                            href="https://www.dropbox.com/sh/hyqded6sb082pwl/AABKtiTZpJUN79fq1Rtn-XGia?dl=0"
+                            href="https://www.dropbox.com/sh/zbws4ilvuze535g/AAD7yG9ahRqH9yWC7XHO_Qbda?dl=0"
                             rel="noopener" target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>nd vibra</td>
-                    <td>
-                        <a
-                            href="https://www.dropbox.com/sh/099mk2ppb6dquhi/AABd9F3pnFVOLFmJkXz4GEIaa?dl=0"
-                            rel="noopener" target="_blank"><img
-                                class="link"
-                                src="/img/link.svg"
-                                alt="link symbol" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>802/Red/B</td>
-                    <td>
-                        <a
-                            href="https://www.dropbox.com/sh/vc4bfcase6hjw0t/AABs5tcDrhbE_qx2b8zIAzGJa?dl=0"
-                            rel="noopener" target="_blank"><img
-                                class="link"
-                                src="/img/link.svg"
-                                alt="link symbol" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>fork razor</td>
-                    <td>
-                        <a
-                            href="https://www.dropbox.com/sh/8app8fjplmvl6zp/AAC832CHujhX-iJ_guKrx2DYa?dl=0"
-                            rel="noopener" target="_blank"><img
-                                class="link"
-                                src="/img/link.svg"
-                                alt="link symbol" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4435, 10, upper</td>
-                    <td>
-                        <a
-                            href="https://www.dropbox.com/sh/13f91hpjn4pnqmc/AAChZyoqPrD4kL6-PyKmW9W2a?dl=0"
-                            rel="noopener" target="_blank"><img
-                                class="link"
-                                src="/img/link.svg"
-                                alt="link symbol" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>ritter, gabo</td>
-                    <td>
-                        <a
-                            href="https://www.dropbox.com/sh/j9px1olweuyxtop/AADmHLXityuW5QhSDO84lAPKa?dl=0"
-                            rel="noopener" target="_blank"><img
-                                class="link"
-                                src="/img/link.svg"
-                                alt="link symbol" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>memory</td>
-                    <td>
-                        <a
-                            href="https://www.dropbox.com/sh/n6bdk1vkjakks16/AAB1Vjj5cRs8KhHI4gwlnvQLa?dl=0"
-                            rel="noopener" target="_blank"><img
-                                class="link"
-                                src="/img/link.svg"
-                                alt="link symbol" /></a>
-                    </td>
-                </tr>
+               
                 <tr>
                     <td>still images</td>
                     <td>source images</td>
@@ -468,35 +413,24 @@
                     </td>
                 </tr>
                 <tr>
-                    <td rowspan="7">
+                    <td>
                         instrument presets, sessions, and configuration data
                     </td>
-                    <td rowspan="7">
+                    <td>
                         session files for ableton live, plugin instrument
                         presets, MIDI sysex configuration data for hardware
                         machines
                     </td>
-                    <td>206/754</td>
-                    <td rowspan="7">various</td>
-                    <td rowspan="7" />
-                </tr>
-                <tr>
-                    <td>nd vibra</td>
-                </tr>
-                <tr>
-                    <td>802/Red/B</td>
-                </tr>
-                <tr>
-                    <td>fork razor</td>
-                </tr>
-                <tr>
-                    <td>4435, 10, upper</td>
-                </tr>
-                <tr>
-                    <td>ritter, gabo</td>
-                </tr>
-                <tr>
-                    <td>memory</td>
+                    <td>all</td>
+                    <td >various</td>
+                    <td>
+                        <a
+                            href="https://www.dropbox.com/sh/q7wg1i6rg0uqlyw/AABLSqwewGXfsbd0CtV01FCza?dl=0"
+                            rel="noopener" target="_blank"><img
+                                class="link"
+                                src="/img/link.svg"
+                                alt="link symbol" /></a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -543,9 +477,4 @@
         </div>
     </div>
 
-    <div class="subsection about-7s">
-        <h2>seven spaces</h2>
-        <p>Seven Spaces is a multimedia album for the web.</p>
-        <p>The audio can be purchased or streamed at Bandcamp.</p>
-    </div>
 </section>

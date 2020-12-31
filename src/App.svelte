@@ -98,7 +98,7 @@
 			folder: "",
 			variation: "full",
 			layerCount: 0,
-			fullScale: 5,
+			fullScale: 4,
 			noShowcase: true,
 			content: About,
 		},
