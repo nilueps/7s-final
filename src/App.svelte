@@ -1,5 +1,5 @@
 <script>
-	import { setContext } from "svelte";
+	import { onMount, setContext } from "svelte";
 
 	import Stack from "./Stack.svelte";
 	import Full from "./Full.svelte";
@@ -162,7 +162,7 @@
 			section.fullTop + fullH(section.id) - window.innerHeight + layerGap;
 		runningTop = section.stackTop;
 		sectionThresholds.push(runningTop);
-		runningTop += stackH(section.id) + layerGap;//window.innerHeight;
+		runningTop += stackH(section.id) + window.innerHeight;
 	}
 	// calculate document height needed for dummy
 	const dummyH = runningTop; // sections.reduce((h, s, i) => h + s.sectionH, 0);
@@ -211,6 +211,7 @@
 		if (!ticking) requestAnimationFrame(updateStack);
 		ticking = true;
 	};
+
 </script>
 
 <style>
@@ -220,6 +221,12 @@
 		left: 0;
 		width: 100%;
 		background: transparent;
+	}
+
+	.snap-anchor {
+		position: absolute;
+		height: 100vh;
+		scroll-snap-align: start end;
 	}
 
 	.top,
@@ -265,6 +272,7 @@
 			font-size: 100%;
 			color: white;
 			background: var(--mainbgcolor);
+			scroll-snap-type: y proximity;
 		}
 
 		iframe {
@@ -280,6 +288,11 @@
 	<Loading />
 {:then _}
 	<div id="dummy" class="dummy" style="height: {dummyH}px">
+		{#each sections as section, index}
+			{#if index > 0 && index < sections.length - 1}
+				<div class="snap-anchor" style="top: {section.fullTop + window.innerHeight * 2}px;" />
+			{/if}
+		{/each}
 		<div id="pagetop" />
 		<div class="top">
 			{#if sections[topSectionIdx].component != null}

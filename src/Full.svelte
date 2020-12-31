@@ -14,7 +14,7 @@
             : section.fullTop + contentTop / 2;
     $: showContent =
         scrollY >= contentThreshold &&
-        scrollY < contentThreshold + window.innerHeight + window.innerHeight;
+        scrollY < contentThreshold + window.innerHeight * 2;
     $: showTitle =
         scrollY >= contentThreshold && scrollY < contentThreshold + window.innerHeight * 0.4;
     let fullRef;
