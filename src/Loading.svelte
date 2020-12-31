@@ -1,4 +1,5 @@
 <script>
+	import { fade } from "svelte/transition"
     const text = "loading";
 </script>
 
@@ -20,11 +21,11 @@
 
     .title {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        animation: pulse 1500ms infinite;
+        animation: pulse 1800ms infinite;
     }
 
     @keyframes pulse {
@@ -55,4 +56,4 @@
     }
 </style>
 
-<div class="loading"><span class="title">{text}</span></div>
+<div transition:fade class="loading"><span class="title">{text}</span></div>

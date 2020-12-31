@@ -1,5 +1,6 @@
 <script>
 	import { onMount, setContext } from "svelte";
+	import { fade } from "svelte/transition"
 
 	import Stack from "./Stack.svelte";
 	import Full from "./Full.svelte";
@@ -287,7 +288,7 @@
 {#await preloadAll()}
 	<Loading />
 {:then _}
-	<div id="dummy" class="dummy" style="height: {dummyH}px">
+	<div transition:fade id="dummy" class="dummy" style="height: {dummyH}px">
 		{#each sections as section, index}
 			{#if index > 0 && index < sections.length - 1}
 				<div class="snap-anchor" style="top: {section.fullTop + window.innerHeight * 2}px;" />
