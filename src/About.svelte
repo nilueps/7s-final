@@ -44,32 +44,32 @@
     }
 
     h1 {
-        font-size: 2.2rem;
-        margin-bottom: 5rem;
+        font-size: 1.85vw;
+        margin-bottom: 2vw;
     }
 
     h2 {
         text-align: center;
-        font-size: 1.5vw;
+        font-size: 1.6vw;
         margin-bottom: 2vw;
     }
     p {
-        font-size: 0.75vw;
+        font-size: 1vw;
         margin-bottom: 0.7vw;
     }
     a {
-        color: #55ffc4;
+        color: #ad8446  ;
         text-decoration: none;
     }
     a:hover {
         text-decoration: underline;
     }
     a:visited {
-        color: #48b68d;
+        color: #ad8347;
     }
 
     table {
-        font-size: 0.75vw;
+        font-size: 0.9vw;
 
     }
     tr {
@@ -96,7 +96,7 @@
 
     .materials table {
         margin-top: 1vw;
-        width: 70vw;
+        width: 75vw;
         text-align: left;
     }
 
@@ -106,7 +106,7 @@
         background-color: rgb(29, 29, 29);
     }
     .materials th {
-        padding: 0.8vw 1vw;
+        padding: 0.5vw 1vw;
     }
     .materials td {
         padding: 0.8vw 1vw;
