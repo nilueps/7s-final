@@ -116,6 +116,14 @@
 		});
 	}
 
+	const preloadQueue = {
+		queue: [],
+		enqueue: pair => this.queue.push(pair),
+		process: function() {
+			this.queue.forEach(pair, preloadImg(pair[0], pair[1]))
+		}
+	}
+
 	function preloadAll() {
 		const firstTwo = [];
 		const remainder = [];
@@ -128,19 +136,18 @@
 			const fullPath = path + `${section.id}_long.jpg`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
-			const promise = preloadImg(fullPath, setFullProp);
-			if (idx < 3) firstTwo.push(promise);
-
+			if (idx < 3) firstTwo.push(preloadImg(fullPath, setFullProp));
+			else (preloadQueue.enqueue([fullPath, setFullProp]))
 			section.layers = [];
 			for (let j = 1; j < section.layerCount + 1; j++) {
 				const layerPath = path + `${section.id}_${j}.png`;
 				const setLayerProp = (img) =>
 					(section.layers = [...section.layers, img]);
-				const promise = preloadImg(layerPath, setLayerProp);
-				if (idx < 3) firstTwo.push(promise);
+				if (idx < 3) firstTwo.push(layerPath, setLayerProp);
+			else (preloadQueue.enqueue([fullPath, setFullProp]))
 			}
 		}
-		return Promise.all(firstTwo);
+		return Promise.all(firstTwo).then(() => preloadQueue.process());
 	}
 
 	//
