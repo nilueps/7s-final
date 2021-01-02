@@ -140,7 +140,6 @@
 			section.full = null;
 			if (idx < 3) firstTwo.push(preloadImg(fullPath, setFullProp));
 			else preloadQueue.enqueue([fullPath, setFullProp]);
-			console.log(preloadQueue.queue);
 			section.layers = [];
 			for (let j = 1; j < section.layerCount + 1; j++) {
 				const layerPath = path + `${section.id}_${j}.png`;
