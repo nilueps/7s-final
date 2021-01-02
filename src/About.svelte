@@ -437,7 +437,7 @@
     </div>
     <div class="subsection thanks">
         <h2>acknowledgments</h2>
-        <div style="text-align: center">
+        <div style="text-align: left">
             <p>
                 Many, many people contributed to the production of this work
                 (some knowingly, some not)
