@@ -145,7 +145,7 @@
 				const layerPath = path + `${section.id}_${j}.png`;
 				const setLayerProp = (img) =>
 					(section.layers = [...section.layers, img]);
-				if (idx < 3) firstTwo.push(preloadImg(fullPath, setFullProp));
+				if (idx < 3) firstTwo.push(preloadImg(layerPath, setLayerProp));
 				else preloadQueue.enqueue([layerPath, setLayerProp]);
 			}
 		}
