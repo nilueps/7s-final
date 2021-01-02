@@ -146,7 +146,7 @@
 				const setLayerProp = (img) =>
 					(section.layers = [...section.layers, img]);
 				if (idx < 3) firstTwo.push(layerPath, setLayerProp);
-				else preloadQueue.enqueue([fullPath, setFullProp]);
+				else preloadQueue.enqueue([layerPath, setLayerProp]);
 			}
 		}
 		return Promise.all(firstTwo).then(() => preloadQueue.process());
