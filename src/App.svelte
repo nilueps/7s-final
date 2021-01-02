@@ -326,6 +326,8 @@
 					<div
 						class="snap-anchor"
 						style="top: {section.fullTop + window.innerHeight * 2}px;" />
+				{:else if index == 0}
+					<div class="snap-anchor" style="height: 100vh; top: 0;" />
 				{:else if index === sections.length -1}
 					<div class="snap-anchor" style="height: 400vh; bottom: 0;" />
 				{/if}
