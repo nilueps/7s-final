@@ -243,6 +243,7 @@
 		position: absolute;
 		height: 100vh;
 		scroll-snap-align: start end;
+		scroll-snap-stop: always;
 	}
 	.top,
 	.bottom {
