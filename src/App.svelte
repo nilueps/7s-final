@@ -79,7 +79,6 @@
 		},
 	];
 
-	
 	// Asset preload
 	function preloadImg(src, cb) {
 		return new Promise((resolve) => {
@@ -107,7 +106,7 @@
 			if (section.layerCount === 0 || section.folder === "") continue;
 
 			const path = `img/layers/`;
-			const fullPath = path + `${section.id}_long.jpg`;
+			const fullPath = path + `${section.id}_long.webp`;
 			const setFullProp = (img) => (section.full = img);
 			section.full = null;
 			if (idx < 3) firstTwo.push(preloadImg(fullPath, setFullProp));
@@ -125,8 +124,7 @@
 	}
 
 	// Element positions
-	const
-		layerGap = 300,
+	const layerGap = 300,
 		fullH = (section) => section.fullScale * window.innerHeight;
 
 	let ticking = false,
@@ -200,13 +198,17 @@
 </script>
 
 <style>
-	/* .snap-anchor {
+	.snap-anchor {
 		position: absolute;
 		height: 100vh;
-		scroll-snap-align: start end;
-		scroll-snap-stop: always;
-	} */
-
+		scroll-snap-align: start;
+		/* scroll-snap-stop: always; */
+		border: 3rem solid red;
+		z-index: 99999;
+	}
+	.scroll-snap {
+		scroll-snap-align: start;
+	}
 	.flex-container {
 		display: flex;
 		justify-content: center;
@@ -244,6 +246,7 @@
 		padding-top: 100vh;
 		background: linear-gradient(#666 0%, black 25%);
 		z-index: -1000;
+		overflow: hidden;
 	}
 
 	@media screen and (max-height: 800px) {
@@ -318,6 +321,14 @@
 	{#await preloadAll()}
 		<Loading />
 	{:then _}
+		<!-- <div class="snap-anchor" style="top: 0px;" />
+		{#each sections as section, index}
+			<div
+				class="snap-anchor"
+				style="top: {section.fullTop + windowH * (index === 0 ? 2 : 3)}px;" />
+		{/each}
+		<div class="snap-anchor" style="top: {aboutTop + windowH}px;" /> -->
+
 		<Landing {scrollY} />
 		{#each sections as section, index}
 			{#if section.layerCount > 0}
@@ -326,11 +337,17 @@
 						class="layer-container"
 						style="height: {windowH + lIndex * layerGap}px; top: {section.stackTop}px; z-index: {-index * 4 + 3 - lIndex};">
 						<div class="layer">
-							<img
-								width="100%"
-								height="100%"
-								src={layer.src}
-								alt="fragment" />
+							<picture>
+								<source type="image/webp" srcset={layer.src} />
+								<source
+									type="image/jpeg"
+									srcset={layer.src.slice(0, -4) + 'jpg'} />
+								<img
+									width="100%"
+									height="100%"
+									src={layer.src}
+									alt="fragment" />
+							</picture>
 						</div>
 					</div>
 				{/each}
