@@ -237,6 +237,8 @@
 	}
 	.about {
 		position: absolute;
+		width: 100%;
+		left: 0;
 		text-align: center;
 		padding: 10vh 10vw;
 		padding-top: 100vh;
@@ -274,7 +276,9 @@
 			margin: 0;
 			padding: 0;
 		}
-
+		html {
+			scroll-behavior: smooth;
+		}
 		html,
 		body {
 			text-align: center;
@@ -348,6 +352,7 @@
 			</section>
 		{/each}
 		<section class="about" style="top: {aboutTop}px;">
+			<div class="about-bg" />
 			<About />
 		</section>
 
