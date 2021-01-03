@@ -320,14 +320,12 @@
 	}
 
 	.btt {
+		cursor: pointer;
 		font-size: 0.7vw;
 		position: fixed;
 		bottom: 0.7vw;
 		right: 0.7vw;
 		transform: translate(-50%, 0);
-	}
-	.btt > a:hover {
-		text-decoration: none;
 	}
 </style>
 
@@ -423,12 +421,15 @@
 		</section>
 
 		{#if showBtt}
-			<div class="btt" transition:fade>
-				<a href="#pagetop"><img
-						height="32px"
-						width="auto"
-						src="img/chevron_up.svg"
-						alt="top" /><br /><span>top</span></a>
+			<div
+				class="btt"
+				transition:fade
+				on:click={() => window.scrollTo(0, 0)}>
+				<img
+					height="32px"
+					width="auto"
+					src="img/chevron_up.svg"
+					alt="top" /><br /><span>top</span>
 			</div>
 		{/if}
 		<!-- <div
