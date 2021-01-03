@@ -63,10 +63,15 @@
 </style>
 
 <div class="flex-container">
-    <img
-        width="100%"
-        height="auto"
-        src="img/layers/1_long.jpg"
-        alt="placeholder" />
+    <picture>
+        <source type="image/webp" srcset="img/layers/1_long.webp" />
+        <source type="image/jpeg" srcset="img/layers/1_long.jpg" />
+        <img
+            width="100%"
+            height="auto"
+            src="img/layers/1_long.jpg"
+            alt="fragment" />
+    </picture>
+
     <div transition:fade class="spinner" />
 </div>
