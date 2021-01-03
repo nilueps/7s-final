@@ -305,7 +305,7 @@
 	}
 	.about {
 		position: absolute;
-		height: 400vh;
+		/* height: 400vh; */
 		text-align: center;
 		padding: 10vh 10vw;
 		padding-top: 100vh;
