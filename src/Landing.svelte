@@ -63,12 +63,12 @@
                 {#if showScroll}
                     <span transition:fade>scroll</span><br />
                 {/if}
-                <!-- <img
+                <img
                     transition:fade
                     width="70px"
                     height="auto"
                     src="/img/chevron_down.svg"
-                    alt="down arrow" /> -->
+                    alt="down arrow" />
             </div>
         {/if}
     </div>
