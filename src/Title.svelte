@@ -1,8 +1,8 @@
 <script>
     import { fade } from "svelte/transition";
 
-    export let showTitle;
-    export let title;
+    export let section;
+    export let scrollY;
 </script>
 
 <style>
@@ -22,6 +22,6 @@
 
 <div class="sticker">
     <h2>
-        {#if showTitle}<span transition:fade>{title}</span>{/if}
+        {#if section.showTitle(scrollY)}<span transition:fade>{section.title}</span>{/if}
     </h2>
 </div>

@@ -15,20 +15,22 @@
 	import Page6 from "./Page6.svelte";
 	import Page7 from "./Page7.svelte";
 	import About from "./About.svelte";
+	import Title from "./Title.svelte";
+	import Content from "./Content.svelte";
 
 	//
 	// component refs
 	//
 	const sections = [
-		{
-			id: 0,
-			title: "landing",
-			folder: "",
-			variation: "full",
-			layerCount: 0,
-			fullScale: 0,
-			component: Landing,
-		},
+		// {
+		// 	id: 0,
+		// 	title: "landing",
+		// 	folder: "",
+		// 	variation: "full",
+		// 	layerCount: 0,
+		// 	fullScale: 0,
+		// 	component: Landing,
+		// },
 		{
 			id: 1,
 			title: "206/754",
@@ -92,16 +94,6 @@
 			fullScale: 4.0,
 			content: Page7,
 		},
-		{
-			id: 8,
-			title: "about",
-			folder: "",
-			variation: "full",
-			layerCount: 0,
-			fullScale: 4,
-			noShowcase: true,
-			content: About,
-		},
 	];
 
 	//
@@ -122,7 +114,7 @@
 			this.queue.push(pair);
 		},
 		process: function () {
-			this.queue.forEach(pair => preloadImg(pair[0], pair[1]));
+			this.queue.forEach((pair) => preloadImg(pair[0], pair[1]));
 		},
 	};
 
@@ -131,8 +123,7 @@
 		const remainder = [];
 		for (let [idx, section] of sections.entries()) {
 			// skip first (landing) and last (about)
-			if (section.id === 0 || section.id === sections.length - 1)
-				continue;
+			if (section.layerCount === 0 || section.folder === "") continue;
 
 			const path = `img/layers/`;
 			const fullPath = path + `${section.id}_long.jpg`;
@@ -162,62 +153,96 @@
 	//
 	// Scrollbar dummy
 	//
-	const fullH = (i) => sections[i].fullScale * window.innerHeight;
-	const stackH = (i) => sections[i].layerCount * layerGap; //sections[i].layerCount > 0 ? window.innerHeight : 0;
+	const fullH = (section) => section.fullScale * window.innerHeight;
+	const stackH = (section) => section.layerCount * layerGap; //sections[i].layerCount > 0 ? window.innerHeight : 0;
 
+	let ticking = false,
+		scrollY = 0,
+		windowH = window.innerHeight;
 	// calculate section thresholds
 	const sectionThresholds = []; // populated with section 'tops'
 	let runningTop = 0;
 	for (let section of sections) {
-		section.fullH = fullH(section.id);
 		section.fullTop = runningTop;
-		section.stackTop =
-			section.fullTop + fullH(section.id) - window.innerHeight + layerGap;
+		section.fullH = fullH(section);
+		section.containerH =
+			section.id > 1 ? section.fullH + windowH : section.fullH;
+		section.stackTop = section.fullTop + section.containerH - windowH;
+		section.contentThreshold =
+			section.fullTop + windowH / 2 + (section.id > 1 ? windowH : 0);
+		section.showContent = function (y) {
+			return (
+				y > section.contentThreshold &&
+				y < section.contentThreshold + window.innerHeight * 2
+			);
+		};
+		section.showTitle = function (y) {
+			return (
+				y > section.contentThreshold &&
+				y < section.contentThreshold + windowH * 0.8
+			);
+		};
+		//section.stackH = stackH(section);
 		runningTop = section.stackTop;
 		sectionThresholds.push(runningTop);
-		runningTop += stackH(section.id) + window.innerHeight;
+		//runningTop += stackH(section);
 	}
+
+	let aboutTop =
+		sections[sections.length - 1].fullTop +
+		sections[sections.length - 1].containerH;
+
 	// calculate document height needed for dummy
-	const dummyH = runningTop; // sections.reduce((h, s, i) => h + s.sectionH, 0);
+	//const dummyH = runningTop; // sections.reduce((h, s, i) => h + s.sectionH, 0);
 
 	//
 	// Scroll logic
 	//
 
-	let ticking = false,
-		scrollY = 0;
+	// let topSectionIdx = 0;
+	// let bottomSectionIdx = 1;
+	// let newSection = false;
 
-	let topSectionIdx = 0;
-	let bottomSectionIdx = 1;
-	let newSection = false;
+	// function isSectionChange(indices) {
+	// 	return topSectionIdx !== indices[0];
+	// }
 
-	function isSectionChange(indices) {
-		return topSectionIdx !== indices[0];
-	}
-
-	function updateVisibleSections(indices) {
-		if (isSectionChange(indices)) {
-			newSection = true;
-			topSectionIdx = indices[0];
-			bottomSectionIdx = indices[1];
-		} else {
-			newSection = false;
-		}
-	}
+	// function updateVisibleSections(indices) {
+	// 	if (isSectionChange(indices)) {
+	// 		newSection = true;
+	// 		topSectionIdx = indices[0];
+	// 		bottomSectionIdx = indices[1];
+	// 	} else {
+	// 		newSection = false;
+	// 	}
+	// }
+	let showBtt = false;
 
 	function updateStack() {
 		ticking = false;
+		if (window.scrollY === scrollY) return;
 		scrollY = window.scrollY;
-		if (!dummyH) return;
-		// compute visible components
-		const tOffset = 0; // to swap out the placeholder before reaching the layers
-		const isPastThreshold = (threshold) => scrollY <= threshold;
-		let idx = sectionThresholds.findIndex((t) =>
-			isPastThreshold(t - tOffset)
+		windowH = window.innerHeight;
+		var body = document.body,
+			html = document.documentElement;
+		var docHeight = Math.max(
+			body.scrollHeight,
+			body.offsetHeight,
+			html.clientHeight,
+			html.scrollHeight,
+			html.offsetHeight
 		);
-		if (idx === -1) idx = sections.length - 1;
-		else if (idx < 1) idx = 1;
-		updateVisibleSections([idx - 1, idx]);
+		showBtt = scrollY > docHeight - window.innerHeight * 4;
+		// if (!dummyH) return;
+		// // compute visible components
+		// const tOffset = 0; // to swap out the placeholder before reaching the layers
+		// const isPastThreshold = (threshold) => scrollY <= threshold;
+		// let idx = sectionThresholds.findIndex((t) =>
+		// 	isPastThreshold(t - tOffset)
+		// );
+		// if (idx === -1) idx = sections.length - 1;
+		// else if (idx < 1) idx = 1;
+		// updateVisibleSections([idx - 1, idx]);
 	}
 
 	const handleScroll = (evt) => {
@@ -239,37 +264,13 @@
 </script>
 
 <style>
-	.dummy {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		background: transparent;
-	}
-
 	.snap-anchor {
 		position: absolute;
 		height: 100vh;
 		scroll-snap-align: start end;
 		scroll-snap-stop: always;
 	}
-	.top,
-	.bottom {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100vh;
-	}
 
-	.top {
-		pointer-events: none;
-		z-index: 2;
-	}
-
-	.bottom {
-		z-index: 1;
-	}
 	#pagetop {
 		position: absolute;
 		top: 0;
@@ -279,6 +280,54 @@
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
+	}
+
+	.bg-container,
+	.layer-container {
+		position: absolute;
+		width: 100vw;
+	}
+
+	.bg,
+	.layer {
+		width: 100vw;
+		position: sticky;
+		top: 0;
+	}
+
+	.layer {
+		height: 100vh;
+	}
+
+	.invisible {
+		visibility: hidden;
+	}
+	.about {
+		position: absolute;
+		height: 400vh;
+		text-align: center;
+		padding: 10vh 10vw;
+		padding-top: 100vh;
+		background: linear-gradient(#666 0%, black 25%);
+		z-index: -1000;
+	}
+
+	@media screen and (max-height: 800px) {
+		.about {
+			padding: 5vh 5vw;
+			padding-top: 100vh;
+		}
+	}
+
+	.btt {
+		font-size: 0.7vw;
+		position: fixed;
+		bottom: 0.7vw;
+		right: 0.7vw;
+		transform: translate(-50%, 0);
+	}
+	.btt > a:hover {
+		text-decoration: none;
 	}
 </style>
 
@@ -311,6 +360,16 @@
 			width: 100%;
 			height: 100%;
 		}
+		a {
+			color: #ad8446;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+		a:visited {
+			color: #ad8347;
+		}
 	</style>
 </svelte:head>
 <svelte:window on:scroll={handleScroll} />
@@ -325,7 +384,54 @@
 	{#await preloadAll()}
 		<Loading />
 	{:then _}
-		<div
+		<div id="pagetop" />
+		<Landing scrollY />
+		{#each sections as section, index}
+			{#if section.layerCount > 0}
+				{#each section.layers as layer, lIndex}
+					<div
+						class="layer-container"
+						style="height: {windowH + lIndex * layerGap}px; top: {section.stackTop}px; z-index: {-index * 4 + 3 - lIndex};">
+						<div class="layer">
+							<img
+								width="100%"
+								height="100%"
+								src={layer.src}
+								alt="fragment" />
+						</div>
+					</div>
+				{/each}
+			{/if}
+			<section
+				class="bg-container"
+				class:invisible={scrollY >= section.stackTop}
+				style="height: {section.containerH}px; top: {section.fullTop}px; z-index: {-index * 4};">
+				<div class="bg" style="height: {section.fullH}px;">
+					{#if section.full != null}
+						<img
+							width="100%"
+							height="100%"
+							src={section.full.src}
+							alt="placeholder" />
+					{/if}
+					<Content {section} {scrollY} />
+				</div>
+			</section>
+		{/each}
+		<section class="about" style="top: {aboutTop}px;">
+			<About {scrollY} />
+		</section>
+
+		{#if showBtt}
+			<div class="btt" transition:fade>
+				<a href="#pagetop"><img
+						height="32px"
+						width="auto"
+						src="img/chevron_up.svg"
+						alt="top" /><br /><span>top</span></a>
+			</div>
+		{/if}
+		<!-- <div
 			transition:fade
 			id="dummy"
 			class="dummy"
@@ -369,6 +475,6 @@
 					{scrollY}
 					{newSection} />
 			</div>
-		</div>
+		</div> -->
 	{/await}
 {/if}

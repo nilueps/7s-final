@@ -1,34 +1,6 @@
-<script>
-    import {  onDestroy, onMount } from "svelte";
 
-    import { fade } from "svelte/transition";
-
-    let showBtt = false;
-
-    function checkBtt() {
-        showBtt =
-            window.scrollY >
-            document.getElementById("dummy").clientHeight -
-                window.innerHeight * 4;
-    }
-    let timer;
-    onMount(() => {
-        timer = setInterval(checkBtt, 250);
-    });
-
-    onDestroy(() => {
-        clearInterval(timer);
-    });
-</script>
 
 <style>
-    .about {
-        height: 400vh;
-        text-align: center;
-        padding: 10vh 10vw;
-        padding-top: 100vh;
-        background: linear-gradient(#666 0%, black 25%);
-    }
 
     .subsection {
         /* height: 90vh; */
@@ -57,20 +29,8 @@
         font-size: 1vw;
         margin-bottom: 0.7vw;
     }
-    a {
-        color: #ad8446  ;
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    a:visited {
-        color: #ad8347;
-    }
-
     table {
         font-size: 0.9vw;
-
     }
     tr {
         height: 1vw;
@@ -117,38 +77,14 @@
         height: 0.7vw;
         width: auto;
     }
-    .btt {
-        font-size: 0.7vw;
-        position: fixed;
-        bottom: 0.7vw;
-        right: 0.7vw;
-        transform: translate(-50%, 0);
-    }
-    .btt > a:hover {
-        text-decoration: none;
-    }
 
     @media screen and (max-height: 800px) {
-        .about {
-            padding: 5vh 5vw;
-            padding-top: 100vh;
-        }
         .materials table {
             margin: 0;
         }
     }
 </style>
 
-<section class="about">
-    {#if showBtt}
-        <div class="btt" transition:fade>
-            <a href="#pagetop"><img
-                    height="32px"
-                    width="auto"
-                    src="img/chevron_up.svg"
-                    alt="top" /><br /><span>top</span></a>
-        </div>
-    {/if}
     <div class="subsection about-7s">
         <h1>about seven spaces</h1>
         <p>Seven Spaces is a multimedia album for the web.</p>
@@ -164,7 +100,8 @@
                 <th>
                     <a
                         href="https://philipmeyer.cargo.site/"
-                        rel="noopener" target="_blank">Philip Meyer</a>
+                        rel="noopener"
+                        target="_blank">Philip Meyer</a>
                 </th>
             </tr>
             <tr>
@@ -191,7 +128,8 @@
                 <th>
                     <a
                         href="https://vimeo.com/user17028823"
-                        rel="noopener" target="_blank">Ariel Fisher</a>
+                        rel="noopener"
+                        target="_blank">Ariel Fisher</a>
                 </th>
             </tr>
             <tr>
@@ -203,7 +141,10 @@
             <tr />
             <tr>
                 <th>
-                    <a href="https://cprinz.co/" rel="noopener" target="_blank">Sarah Prinz</a>
+                    <a
+                        href="https://cprinz.co/"
+                        rel="noopener"
+                        target="_blank">Sarah Prinz</a>
                 </th>
             </tr>
             <tr>
@@ -255,14 +196,18 @@
             <tr>
                 <td rowspan="3" />
                 <th>
-                    <a href="http://vincentpapineau.com" rel="noopener" target="_blank">Vincent
-                        Papineau, design</a>
+                    <a
+                        href="http://vincentpapineau.com"
+                        rel="noopener"
+                        target="_blank">Vincent Papineau, design</a>
                 </th>
             </tr>
             <tr>
                 <th>
-                    <a href="https://nilueps.net" rel="noopener" target="_blank">Nicolas
-                        Epstein, code</a>
+                    <a
+                        href="https://nilueps.net"
+                        rel="noopener"
+                        target="_blank">Nicolas Epstein, code</a>
                 </th>
                 <td rowspan="2" />
             </tr>
@@ -295,12 +240,16 @@
                     <td rowspan="4" />
                     <td>206/754</td>
                     <td rowspan="2">
-                        <a href="https://p5js.org/" rel="noopener" target="_blank">p5.js</a>
+                        <a
+                            href="https://p5js.org/"
+                            rel="noopener"
+                            target="_blank">p5.js</a>
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/berg-intro-visual"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -311,7 +260,8 @@
                     <td>
                         <a
                             href="https://github.com/pdmeyer/covd-visual"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -323,12 +273,16 @@
                         nd vibra; fork razor; ritter, gabo; 802/Red/B; memory
                     </td>
                     <td rowspan="4">
-                        <a href="https://cycling74.com/" rel="noopener" target="_blank">Max</a>
+                        <a
+                            href="https://cycling74.com/"
+                            rel="noopener"
+                            target="_blank">Max</a>
                     </td>
                     <td>
                         <a
                             href="https://github.com/pdmeyer/3d-scan-trans"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -346,7 +300,8 @@
                     <td>
                         <a
                             href="https://github.com/pdmeyer/bfg-lfo"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -367,7 +322,8 @@
                     <td>
                         <a
                             href="https://github.com/pdmeyer/time-series-audio-data"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -384,20 +340,21 @@
                     <td />
                 </tr>
                 <tr>
-                    <td >audio files</td>
-                    <td >stems</td>
-                    <td >all</td>
-                    <td >WAV file</td>
+                    <td>audio files</td>
+                    <td>stems</td>
+                    <td>all</td>
+                    <td>WAV file</td>
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/zbws4ilvuze535g/AAD7yG9ahRqH9yWC7XHO_Qbda?dl=0"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
                     </td>
                 </tr>
-               
+
                 <tr>
                     <td>still images</td>
                     <td>source images</td>
@@ -406,7 +363,8 @@
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/nz6umskhhyxcrqj/AADR3VAZRhebC-vm9xlirC5qa?dl=0"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -422,11 +380,12 @@
                         machines
                     </td>
                     <td>all</td>
-                    <td >various</td>
+                    <td>various</td>
                     <td>
                         <a
                             href="https://www.dropbox.com/sh/q7wg1i6rg0uqlyw/AABLSqwewGXfsbd0CtV01FCza?dl=0"
-                            rel="noopener" target="_blank"><img
+                            rel="noopener"
+                            target="_blank"><img
                                 class="link"
                                 src="/img/link.svg"
                                 alt="link symbol" /></a>
@@ -453,22 +412,29 @@
             <p>Ariel Fisher</p>
             <p>Lee Kawasaki</p>
             <p>
-                <a href="https://p5js.org/" rel="noopener" target="_blank">the P5.js Community</a>
+                <a href="https://p5js.org/" rel="noopener" target="_blank">the
+                    P5.js Community</a>
             </p>
             <p>
-                <a href="https://processingfoundation.org/" rel="noopener" target="_blank">The
-                    Processing Foundation</a>
+                <a
+                    href="https://processingfoundation.org/"
+                    rel="noopener"
+                    target="_blank">The Processing Foundation</a>
             </p>
             <p>
                 <a
                     href="https://www.google.com/search?q=amazing+max+stuff&oq=amazing+max+stuff&aqs=chrome..69i57.1746j0j7&sourceid=chrome&ie=UTF-8"
-                    rel="noopener" target="_blank">Federico Foderaro / Amazing Max Stuff</a>:
+                    rel="noopener"
+                    target="_blank">Federico Foderaro / Amazing Max Stuff</a>:
                 training, inspiration, and support on Jitter and OpenGL in Max
             </p>
             <p>
-                <a href="https://thecodingtrain.com/" rel="noopener" target="_blank">Daniel
-                    Schiffman / The Coding Train:</a>: training and inspiration
-                in Processing and P5, conceptual contributions
+                <a
+                    href="https://thecodingtrain.com/"
+                    rel="noopener"
+                    target="_blank">Daniel Schiffman / The Coding Train:</a>:
+                training and inspiration in Processing and P5, conceptual
+                contributions
             </p>
             <p>
                 Max/MSP creators and educators: Matt Wright, Italo Lombardo,
@@ -476,5 +442,3 @@
             </p>
         </div>
     </div>
-
-</section>
