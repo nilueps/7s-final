@@ -17,6 +17,7 @@
         font-size: 2rem;
         height: min-content;
         text-align: center;
+        letter-spacing: 0.1rem;
     }
 </style>
 

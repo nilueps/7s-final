@@ -1,7 +1,6 @@
 <script>
 	import { fade } from "svelte/transition";
 
-
 	import Loading from "./Loading.svelte";
 	import Landing from "./Landing.svelte";
 	import Page1 from "./Page1.svelte";
@@ -14,19 +13,7 @@
 	import About from "./About.svelte";
 	import Content from "./Content.svelte";
 
-	//
-	// component refs
-	//
 	const sections = [
-		// {
-		// 	id: 0,
-		// 	title: "landing",
-		// 	folder: "",
-		// 	variation: "full",
-		// 	layerCount: 0,
-		// 	fullScale: 0,
-		// 	component: Landing,
-		// },
 		{
 			id: 1,
 			title: "206/754",
@@ -92,9 +79,8 @@
 		},
 	];
 
-	//
-	// asset preload
-	//
+	
+	// Asset preload
 	function preloadImg(src, cb) {
 		return new Promise((resolve) => {
 			const img = new Image();
@@ -138,15 +124,10 @@
 		return Promise.all(firstTwo).then(() => preloadQueue.process());
 	}
 
-	//
-	// global 	context vars
-	//
-	const layerGap = 300;
-
-	//
-	// Scrollbar dummy
-	//
-	const fullH = (section) => section.fullScale * window.innerHeight;
+	// Element positions
+	const
+		layerGap = 300,
+		fullH = (section) => section.fullScale * window.innerHeight;
 
 	let ticking = false,
 		scrollY = 0,
@@ -182,6 +163,7 @@
 
 	let showBtt = false;
 
+	// Update scroll position variables
 	function updateStack() {
 		ticking = false;
 		if (window.scrollY === scrollY) return;
@@ -204,7 +186,7 @@
 		ticking = true;
 	};
 
-	// mobile check
+	// Mobile check
 	const mobileCheck = (function (a) {
 		return (
 			/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
