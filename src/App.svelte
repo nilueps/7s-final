@@ -385,7 +385,7 @@
 		<Loading />
 	{:then _}
 		<div id="pagetop" />
-		<Landing scrollY />
+		<Landing {scrollY} />
 		{#each sections as section, index}
 			{#if section.layerCount > 0}
 				{#each section.layers as layer, lIndex}

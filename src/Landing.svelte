@@ -8,7 +8,7 @@
 
     let showChevron = false;
 
-    $: visible = scrollY < 50;
+    $: visible = scrollY === 0;
 
     let showScroll = false;
     function handleClick() {
