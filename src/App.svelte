@@ -285,12 +285,13 @@
 	.bg-container,
 	.layer-container {
 		position: absolute;
-		width: 100vw;
+		left: 0;
+		width: 100%;
 	}
 
 	.bg,
 	.layer {
-		width: 100vw;
+		width: 100%;
 		position: sticky;
 		top: 0;
 	}
