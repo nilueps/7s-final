@@ -12,7 +12,6 @@
 
     let showScroll = false;
     function handleClick() {
-        console.log("clicked")
         showScroll = true;
         setTimeout(() => (showScroll = false), 1000);
     }

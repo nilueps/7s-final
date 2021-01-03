@@ -1,9 +1,6 @@
 <script>
-	import { onMount, setContext } from "svelte";
 	import { fade } from "svelte/transition";
 
-	import Stack from "./Stack.svelte";
-	import Full from "./Full.svelte";
 
 	import Loading from "./Loading.svelte";
 	import Landing from "./Landing.svelte";
@@ -15,7 +12,6 @@
 	import Page6 from "./Page6.svelte";
 	import Page7 from "./Page7.svelte";
 	import About from "./About.svelte";
-	import Title from "./Title.svelte";
 	import Content from "./Content.svelte";
 
 	//
@@ -120,7 +116,6 @@
 
 	function preloadAll() {
 		const firstTwo = [];
-		const remainder = [];
 		for (let [idx, section] of sections.entries()) {
 			// skip first (landing) and last (about)
 			if (section.layerCount === 0 || section.folder === "") continue;
@@ -147,21 +142,17 @@
 	// global 	context vars
 	//
 	const layerGap = 300;
-	const easing = "top ease 200ms"; // cubic-bezier(.55,.06,.68,.19) 0s";
-	setContext("stackVars", { layerGap, easing });
 
 	//
 	// Scrollbar dummy
 	//
 	const fullH = (section) => section.fullScale * window.innerHeight;
-	const stackH = (section) => section.layerCount * layerGap; //sections[i].layerCount > 0 ? window.innerHeight : 0;
 
 	let ticking = false,
 		scrollY = 0,
-		windowH = window.innerHeight;
-	// calculate section thresholds
-	const sectionThresholds = []; // populated with section 'tops'
-	let runningTop = 0;
+		windowH = window.innerHeight,
+		runningTop = 0;
+
 	for (let section of sections) {
 		section.fullTop = runningTop;
 		section.fullH = fullH(section);
@@ -182,40 +173,13 @@
 				y < section.contentThreshold + windowH * 0.8
 			);
 		};
-		//section.stackH = stackH(section);
 		runningTop = section.stackTop;
-		sectionThresholds.push(runningTop);
-		//runningTop += stackH(section);
 	}
 
 	let aboutTop =
 		sections[sections.length - 1].fullTop +
 		sections[sections.length - 1].containerH;
 
-	// calculate document height needed for dummy
-	//const dummyH = runningTop; // sections.reduce((h, s, i) => h + s.sectionH, 0);
-
-	//
-	// Scroll logic
-	//
-
-	// let topSectionIdx = 0;
-	// let bottomSectionIdx = 1;
-	// let newSection = false;
-
-	// function isSectionChange(indices) {
-	// 	return topSectionIdx !== indices[0];
-	// }
-
-	// function updateVisibleSections(indices) {
-	// 	if (isSectionChange(indices)) {
-	// 		newSection = true;
-	// 		topSectionIdx = indices[0];
-	// 		bottomSectionIdx = indices[1];
-	// 	} else {
-	// 		newSection = false;
-	// 	}
-	// }
 	let showBtt = false;
 
 	function updateStack() {
@@ -233,16 +197,6 @@
 			html.offsetHeight
 		);
 		showBtt = scrollY > docHeight - window.innerHeight * 4;
-		// if (!dummyH) return;
-		// // compute visible components
-		// const tOffset = 0; // to swap out the placeholder before reaching the layers
-		// const isPastThreshold = (threshold) => scrollY <= threshold;
-		// let idx = sectionThresholds.findIndex((t) =>
-		// 	isPastThreshold(t - tOffset)
-		// );
-		// if (idx === -1) idx = sections.length - 1;
-		// else if (idx < 1) idx = 1;
-		// updateVisibleSections([idx - 1, idx]);
 	}
 
 	const handleScroll = (evt) => {
@@ -412,7 +366,7 @@
 			</section>
 		{/each}
 		<section class="about" style="top: {aboutTop}px;">
-			<About {scrollY} />
+			<About />
 		</section>
 
 		{#if showBtt}
@@ -427,50 +381,5 @@
 					alt="top" /><br /><span>top</span>
 			</div>
 		{/if}
-		<!-- <div
-			transition:fade
-			id="dummy"
-			class="dummy"
-			style="height: {dummyH}px">
-			{#each sections as section, index}
-				{#if index > 0 && index < sections.length - 1}
-					<div
-						class="snap-anchor"
-						style="top: {section.fullTop + window.innerHeight * 2}px;" />
-				{:else if index == 0}
-					<div class="snap-anchor" style="height: 100vh; top: 0;" />
-				{:else if index === sections.length - 1}
-					<div
-						class="snap-anchor"
-						style="height: 400vh; bottom: 0;" />
-				{/if}
-			{/each}
-			<div id="pagetop" />
-			<div class="top">
-				{#if sections[topSectionIdx].component != null}
-					<svelte:component
-						this={sections[topSectionIdx].component}
-						{scrollY} />
-				{:else}
-					<Stack
-						section={sections[topSectionIdx]}
-						{scrollY}
-						{newSection} />
-				{/if}
-			</div>
-			<div class="bottom">
-				{#if sections[bottomSectionIdx].layerCount > 0}
-					<Stack
-						section={sections[bottomSectionIdx]}
-						{scrollY}
-						{newSection} />
-				{/if}
-
-				<Full
-					section={sections[bottomSectionIdx]}
-					{scrollY}
-					{newSection} />
-			</div>
-		</div> -->
 	{/await}
 {/if}
