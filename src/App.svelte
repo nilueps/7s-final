@@ -264,17 +264,13 @@
 </script>
 
 <style>
-	.snap-anchor {
+	/* .snap-anchor {
 		position: absolute;
 		height: 100vh;
 		scroll-snap-align: start end;
 		scroll-snap-stop: always;
-	}
+	} */
 
-	#pagetop {
-		position: absolute;
-		top: 0;
-	}
 	.flex-container {
 		display: flex;
 		justify-content: center;
@@ -382,7 +378,6 @@
 	{#await preloadAll()}
 		<Loading />
 	{:then _}
-		<div id="pagetop" />
 		<Landing {scrollY} />
 		{#each sections as section, index}
 			{#if section.layerCount > 0}
