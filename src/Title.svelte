@@ -8,13 +8,15 @@
 <style>
     .sticker {
         height: 100vh;
-        padding-bottom: 5rem;
+        padding-bottom: 15rem;
     }
     h2 {
         position: -webkit-sticky;
         position: sticky;
         top: 50vh;
-        font-size: 2rem;
+        font-size: 4rem;
+        font-style: normal;
+        font-weight: 400;
         height: min-content;
         text-align: center;
         letter-spacing: 0.1rem;
@@ -23,6 +25,6 @@
 
 <div class="sticker">
     <h2>
-        {#if section.showTitle(scrollY)}<span transition:fade>{section.title}</span>{/if}
+        {#if true}<span transition:fade>{section.title}</span>{/if}
     </h2>
 </div>

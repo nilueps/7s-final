@@ -34,7 +34,7 @@
 		},
 		{
 			id: 3,
-			title: "802/red/B",
+			title: "802/Red/B",
 			folder: "red",
 			variation: "full",
 			layerCount: 3,
@@ -306,18 +306,14 @@
 		body {
 			text-align: center;
 			font-size: 100%;
-			color: white;
+			color: #f4edb2;
 			background: var(--mainbgcolor);
 			scroll-snap-type: y proximity;
 		}
 
-		body {
-			padding: 0;
-		}
-
 		iframe {
 			border: none;
-			border-radius: 0.2rem;
+			border-radius: 0.2rem;	
 			width: 100%;
 			height: 100%;
 		}

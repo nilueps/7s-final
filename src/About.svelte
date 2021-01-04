@@ -23,7 +23,7 @@
     h2 {
         text-align: center;
         font-size: 1.6vw;
-        margin-bottom: 2vw;
+        margin-bottom: 3vw;
     }
     p {
         font-size: 1vw;
@@ -50,7 +50,7 @@
     }
 
     div.subsection.materials > p {
-        margin: 0.75vw 20vw;
+        margin: 0.75vw 2.5vw;
         text-align: left;
     }
 

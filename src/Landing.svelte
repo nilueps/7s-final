@@ -28,9 +28,8 @@
         height: 100vh;
         z-index: 1;
         overflow: hidden;
-        color: white;
         user-select: none;
-        font-size: 2rem;
+        font-size: 5rem;
         font-weight: normal;
         background: transparent;
     }
