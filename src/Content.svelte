@@ -27,7 +27,7 @@
 </style>
 
 {#if section.showContent(scrollY)}
-    <div transition:fade class="shade" />
+<div transition:fade class="shade" />
     <div transition:fade class="content" style="top: {window.innerHeight}px;">
         <Title {section} {scrollY} />
         <svelte:component this={section.content} />

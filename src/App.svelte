@@ -139,11 +139,11 @@
 			section.id > 1 ? section.fullH + windowH : section.fullH;
 		section.stackTop = section.fullTop + section.containerH - windowH;
 		section.contentThreshold =
-			section.fullTop + windowH / 2 + (section.id > 1 ? windowH : 0);
+			section.fullTop + windowH / 4 + (section.id > 1 ? windowH : 0);
 		section.showContent = function (y) {
 			return (
 				y > section.contentThreshold &&
-				y < section.contentThreshold + window.innerHeight * 2
+				y < section.contentThreshold + window.innerHeight * 2.5
 			);
 		};
 		section.showTitle = function (y) {
@@ -161,27 +161,41 @@
 
 	let showBtt = false;
 
-	// Update scroll position variables
-	function updateStack() {
-		ticking = false;
-		if (window.scrollY === scrollY) return;
-		scrollY = window.scrollY;
-		windowH = window.innerHeight;
-		var body = document.body,
+	function docHeight() {
+		const body = document.body,
 			html = document.documentElement;
-		var docHeight = Math.max(
+		return Math.max(
 			body.scrollHeight,
 			body.offsetHeight,
 			html.clientHeight,
 			html.scrollHeight,
 			html.offsetHeight
 		);
-		showBtt = scrollY > docHeight - window.innerHeight * 4;
+	}
+
+	// function to set bottom anchor dynamically, because absolute positioned elements in DOM provide no doc height
+	let container, about, bottomAnchor, bottomAnchorIsPositioned = false;
+	function setBottomAnchor() {
+		const height = about.clientHeight - windowH;
+		bottomAnchor.style.top = docHeight() - height + "px";
+		bottomAnchor.style.height = height + 'px';
+		bottomAnchorIsPositioned = true;
+	}
+
+	// Update scroll position variables
+	function updateStack() {
+		ticking = false;
+		if (window.scrollY === scrollY) return;
+		scrollY = window.scrollY;
+		windowH = window.innerHeight;
+		
+		showBtt = scrollY > docHeight() - window.innerHeight * 4;
 	}
 
 	const handleScroll = (evt) => {
 		if (!ticking) requestAnimationFrame(updateStack);
 		ticking = true;
+		if (!bottomAnchorIsPositioned && container && about && bottomAnchor) setBottomAnchor();
 	};
 
 	// Mobile check
@@ -195,20 +209,25 @@
 			)
 		);
 	})(navigator.userAgent || navigator.vendor || window.opera);
+
 </script>
 
 <style>
+	.container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+	}
 	.snap-anchor {
 		position: absolute;
 		height: 100vh;
 		scroll-snap-align: start;
-		/* scroll-snap-stop: always; */
-		border: 3rem solid red;
+		scroll-snap-stop: always;
+		/* border: 3rem solid red; */
 		z-index: 99999;
 	}
-	.scroll-snap {
-		scroll-snap-align: start;
-	}
+
 	.flex-container {
 		display: flex;
 		justify-content: center;
@@ -291,6 +310,10 @@
 			scroll-snap-type: y proximity;
 		}
 
+		body {
+			padding: 0;
+		}
+
 		iframe {
 			border: none;
 			border-radius: 0.2rem;
@@ -321,69 +344,72 @@
 	{#await preloadAll()}
 		<Loading />
 	{:then _}
-		<!-- <div class="snap-anchor" style="top: 0px;" />
-		{#each sections as section, index}
-			<div
-				class="snap-anchor"
-				style="top: {section.fullTop + windowH * (index === 0 ? 2 : 3)}px;" />
-		{/each}
-		<div class="snap-anchor" style="top: {aboutTop + windowH}px;" /> -->
-
-		<Landing {scrollY} />
-		{#each sections as section, index}
-			{#if section.layerCount > 0}
-				{#each section.layers as layer, lIndex}
-					<div
-						class="layer-container"
-						style="height: {windowH + lIndex * layerGap}px; top: {section.stackTop}px; z-index: {-index * 4 + 3 - lIndex};">
-						<div class="layer">
-							<picture>
-								<source type="image/webp" srcset={layer.src} />
-								<source
-									type="image/jpeg"
-									srcset={layer.src.slice(0, -4) + 'jpg'} />
-								<img
-									width="100%"
-									height="100%"
-									src={layer.src}
-									alt="fragment" />
-							</picture>
+		<div bind:this={container} class="container">
+			<Landing {scrollY} />
+			{#each sections as section, index}
+				{#if section.layerCount > 0}
+					{#each section.layers as layer, lIndex}
+						<div
+							class="layer-container"
+							style="height: {windowH + lIndex * layerGap}px; top: {section.stackTop}px; z-index: {-index * 4 + 3 - lIndex};">
+							<div class="layer">
+								<picture>
+									<source
+										type="image/webp"
+										srcset={layer.src} />
+									<source
+										type="image/jpeg"
+										srcset={layer.src.slice(0, -4) + 'jpg'} />
+									<img
+										width="100%"
+										height="100%"
+										src={layer.src}
+										alt="fragment" />
+								</picture>
+							</div>
 						</div>
+					{/each}
+				{/if}
+				<section
+					class="bg-container"
+					class:invisible={scrollY >= section.stackTop}
+					style="height: {section.containerH}px; top: {section.fullTop}px; z-index: {-index * 4};">
+					<div class="bg" style="height: {section.fullH}px;">
+						{#if section.full != null}
+							<img
+								width="100%"
+								height="100%"
+								src={section.full.src}
+								alt="placeholder" />
+						{/if}
+						<Content {section} {scrollY} />
 					</div>
-				{/each}
-			{/if}
-			<section
-				class="bg-container"
-				class:invisible={scrollY >= section.stackTop}
-				style="height: {section.containerH}px; top: {section.fullTop}px; z-index: {-index * 4};">
-				<div class="bg" style="height: {section.fullH}px;">
-					{#if section.full != null}
-						<img
-							width="100%"
-							height="100%"
-							src={section.full.src}
-							alt="placeholder" />
-					{/if}
-					<Content {section} {scrollY} />
-				</div>
+				</section>
+			{/each}
+			<section bind:this={about} class="about" style="top: {aboutTop}px;">
+				<div class="about-bg" />
+				<About />
 			</section>
-		{/each}
-		<section class="about" style="top: {aboutTop}px;">
-			<div class="about-bg" />
-			<About />
-		</section>
 
-		{#if showBtt}
-			<div
-				class="btt"
-				transition:fade
-				on:click={() => window.scrollTo(0, 0)}>
-				<img
-					height="32px"
-					width="auto"
-					src="img/chevron_up.svg"
-					alt="top" /><br /><span>top</span>
-			</div>
-		{/if}
+			{#if showBtt}
+				<div
+					class="btt"
+					transition:fade
+					on:click={() => window.scrollTo(0, 0)}>
+					<img
+						height="32px"
+						width="auto"
+						src="img/chevron_up.svg"
+						alt="top" /><br /><span>top</span>
+				</div>
+			{/if}
+			<div class="snap-anchor" style="top: 0px;" />
+			{#each sections as section, index}
+				<div
+					class="snap-anchor"
+					style="top: {section.fullTop + windowH * (index === 0 ? 2 : 3)}px;" />
+			{/each}
+			<div bind:this={bottomAnchor} class="snap-anchor"/>
+		</div>
 	{/await}
 {/if}
