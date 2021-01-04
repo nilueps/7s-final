@@ -176,7 +176,7 @@
 	// function to set bottom anchor dynamically, because absolute positioned elements in DOM provide no doc height
 	let container, about, bottomAnchor, bottomAnchorIsPositioned = false;
 	function setBottomAnchor() {
-		const height = about.clientHeight - windowH;
+		const height = about.clientHeight - windowH / 1.5;
 		bottomAnchor.style.top = docHeight() - height + "px";
 		bottomAnchor.style.height = height + 'px';
 		bottomAnchorIsPositioned = true;
@@ -197,6 +197,7 @@
 		ticking = true;
 		if (!bottomAnchorIsPositioned && container && about && bottomAnchor) setBottomAnchor();
 	};
+
 
 	// Mobile check
 	const mobileCheck = (function (a) {
@@ -332,7 +333,7 @@
 		}
 	</style>
 </svelte:head>
-<svelte:window on:scroll={handleScroll} />
+<svelte:window on:scroll={handleScroll} on:resize={setBottomAnchor}/>
 {#if mobileCheck}
 	<div class="flex-container">
 		<p style="margin: 0 2rem;">
