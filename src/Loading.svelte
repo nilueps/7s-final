@@ -24,7 +24,7 @@
     .spinner {
         width: 40px;
         height: 40px;
-        background-color: rgb(255, 255, 255);
+        background-color: #f4edb2;
 
         margin: 100px auto;
         -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
